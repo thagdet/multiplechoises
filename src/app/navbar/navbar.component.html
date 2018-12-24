@@ -1,0 +1,33 @@
+<div class="base-header anon-header anon-header-white language-en static-background" id="hd">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="/images/logo.png" width="140" height="50">
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li style="cursor: pointer" data-toggle="modal" data-target="#register"><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <!--<li style="cursor: pointer"><a href="http://localhost:3000/logout"><span class="glyphicon glyphicon-log-in"></span> <%= username %></a></li>-->
+      <li style="cursor: pointer" data-toggle="modal" data-target="#loginRoute"><a><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</div>
+<br><br><br>
+<script>
+  window.onscroll = function () { myFunction() };
+
+  var navbar = document.getElementById("hd");
+  var sticky = navbar.offsetTop;
+
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      navbar.classList.add("scroll-sticky")
+    } else {
+      navbar.classList.remove("scroll-sticky");
+    }
+  }
+</script>

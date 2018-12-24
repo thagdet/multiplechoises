@@ -1,0 +1,33 @@
+.base-header.anon-header {
+  border: none;
+  z-index: 20;
+  position: fixed;
+  width: 100%;
+  padding-top: 0;
+  left: 0;
+  right: 0;
+  max-width: none;
+}
+.anon-header.anon-header-white {
+  background-color: #fff;
+}
+.base-header {
+  position: relative;
+  z-index: 300;
+}
+.anon-header {
+  position: relative;
+  height: 50px;
+  z-index: 300;
+}
+div {
+  display: block;
+}
+.base-header.anon-header.scroll-sticky {
+  box-shadow: 0 4px 4px 0 rgba(51,62,72,0.13), 0 4px 4px 0 rgba(51,62,72,0.13);
+  background-color: #fff;
+}
+.anon-header .inner-header-top {
+  height: 0;
+  padding: 0;
+}
