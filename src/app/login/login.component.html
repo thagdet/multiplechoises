@@ -1,0 +1,59 @@
+<div class="modal fade" id="loginRoute" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" name="loginForm" #loginForm="ngForm" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+            <span class="login100-form-logo">
+                <img src="../../assets/images/logo.png" width="180" height="70">
+            </span>
+            <span class="login100-form-title p-b-34 p-t-27">
+                Log in
+              <button id="closeLoginModal" type="button" class="close" data-dismiss="modal" style="display:none"></button>
+            </span>
+
+          <mat-form-field class="wrap-input100 validate-input">
+            <input matInput type="text" class="input100"
+                   [(ngModel)]="account.username" formControlName="username" required
+                   maxlength="50">
+            <span class="focus-input100" data-placeholder="Username"></span>
+            <mat-error *ngFor="let validation of validation_messages.username">
+              <mat-error class="error-message"
+                         *ngIf="formLogin.get('username').hasError(validation.type) && (formLogin.get('username').dirty || formLogin.get('username').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="password" class="input100"
+                 [(ngModel)]="account.password" formControlName="password" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Password"></span>
+          <mat-error *ngFor="let validation of validation_messages.password">
+            <mat-error class="error-message"
+                       *ngIf="formLogin.get('password').hasError(validation.type) && (formLogin.get('password').dirty || formLogin.get('password').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="contact100-form-checkbox">
+          <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+          <label class="label-checkbox100" for="ckb1">
+            Remember me
+          </label>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" type="submit">
+            Login
+          </button>
+        </div>
+        <div class="text-center p-t-90">
+          <a class="txt1" href="#">
+            Forgot Password?
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
