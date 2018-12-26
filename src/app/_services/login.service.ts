@@ -4,6 +4,7 @@ import { Account } from '../_model/Account';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { Url} from '../url';
+import {Login} from '../_model/login';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,9 +16,9 @@ const httpOptions = {
 export class LoginService {
 
   constructor(private http: HttpClient) { }
-  login(account: Account): Observable <Account> {
-    return this.http.post<Account>(Url.URL + 'account/checklogin', account, httpOptions).pipe(
-      catchError(this.handleError <Account>('login'))
+  login(account: Account): Observable <Login> {
+    return this.http.post<Login>(Url.URL + 'account/checklogin', account, httpOptions).pipe(
+      catchError(this.handleError <Login>('login'))
     );
   }
 
