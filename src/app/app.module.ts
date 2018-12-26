@@ -13,6 +13,7 @@ import { LoginService } from './_services/login.service';
 import { CreateTestService } from './_services/create-test.service';
 import { SubjectComponent } from './subject/subject.component';
 import { CreateTestComponent } from './create-test/create-test.component';
+import { SubjectService } from './_services/subject.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { CreateTestComponent } from './create-test/create-test.component';
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [LoginService, CreateTestService],
+  providers: [LoginService, SubjectService, CreateTestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
