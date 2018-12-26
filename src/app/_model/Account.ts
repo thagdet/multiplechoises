@@ -1,7 +1,7 @@
 export class Account {
-  public username: string;
-  public password: string;
-  public facebook: string;
-  public gmail: string;
-  public idRole: number;
+  public UserName: string;
+  public Password: string;
+  public Facebook?: string;
+  public Gmail?: string;
+  public IdRole?: number;
 }

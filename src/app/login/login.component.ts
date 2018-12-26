@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Account} from '../_model/Account';
+import {Login} from '../_model/login';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import swal from 'sweetalert2';
@@ -36,6 +37,8 @@ export class LoginComponent implements OnInit {
       value => {
         console.log(value);
         if (value !== undefined) {
+          localStorage.setItem('token', value.token);
+          localStorage.setItem('username', value.data.UserName);
           document.getElementById('closeLoginModal').click();
           swal({
             title: 'SUCCESS',
