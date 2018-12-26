@@ -35,18 +35,23 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.loginService.login(this.account).subscribe(
       value => {
-        console.log(value);
-        if (value !== undefined) {
+        if (value.status) {
           localStorage.setItem('token', value.token);
           localStorage.setItem('username', value.data.UserName);
           document.getElementById('closeLoginModal').click();
           swal({
             title: 'SUCCESS',
-            html: 'Welcome',
+            html: value.message,
             type: 'success'
           });
+          location.reload();
         } else {
           console.log('fault');
+          swal({
+            title: 'Failed',
+            html: value.message,
+            type: 'error'
+          });
         }
       }, error => {
         console.log(error);

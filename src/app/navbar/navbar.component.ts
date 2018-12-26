@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  username: string;
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     window.onscroll = function () { myFunction(); };
@@ -22,6 +25,17 @@ export class NavbarComponent implements OnInit {
         navbar.classList.remove('scroll-sticky');
       }
     }
-  }
 
+    if (localStorage.getItem('token') !== undefined) {
+      this.username = localStorage.getItem('username');
+    }
+  }
+  logout() {
+    localStorage.clear();
+    if (this.router.url === '/') {
+      location.reload();
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
 }
