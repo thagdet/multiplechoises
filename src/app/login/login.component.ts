@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Account} from '../_model/Account';
-import {Login} from '../_model/login';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import swal from 'sweetalert2';
@@ -36,8 +35,10 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.account).subscribe(
       value => {
         if (value.status) {
+          const data = <Account>value.data;
           localStorage.setItem('token', value.token);
-          localStorage.setItem('username', value.data.UserName);
+          localStorage.setItem('username', data.UserName);
+          localStorage.setItem('idAccount', data._id);
           document.getElementById('closeLoginModal').click();
           swal({
             title: 'SUCCESS',
