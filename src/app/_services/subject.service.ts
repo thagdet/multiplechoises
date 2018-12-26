@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Subject} from '../_model/Subject';
 import {Url} from '../url';
 import {catchError} from 'rxjs/operators';
+import {Login} from '../_model/login';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,9 +16,9 @@ const httpOptions = {
 export class SubjectService {
 
   constructor(private http: HttpClient) { }
-  GetAllSubjectByIdAccount(id: Number): Observable <Subject[]> {
-    return this.http.get<Subject[]>(Url.URL + 'class/idAccount/' + id, httpOptions).pipe(
-      catchError(this.handleError <Subject[]>('GetAllSubjectByIdAccount', []))
+  GetAllSubjectByIdAccount(id: string): Observable <Login> {
+    return this.http.get<Login>(Url.URL + 'class/idAccount/' + id, httpOptions).pipe(
+      catchError(this.handleError <Login>('GetAllSubjectByIdAccount'))
     );
   }
 

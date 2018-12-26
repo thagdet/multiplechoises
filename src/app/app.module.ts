@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginService } from './_services/login.service';
 import { SubjectComponent } from './subject/subject.component';
 import { CreateTestComponent } from './create-test/create-test.component';
+import { SubjectService } from './_services/subject.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { CreateTestComponent } from './create-test/create-test.component';
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [LoginService],
+  providers: [LoginService, SubjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

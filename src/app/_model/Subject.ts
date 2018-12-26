@@ -1,4 +1,4 @@
 export class Subject {
-  public status: boolean;
-  public message: string;
+  public name: string;
+  public credits: Number;
 }
