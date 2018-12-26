@@ -8,8 +8,9 @@ import {Login} from '../_model/login';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json' })
+      'Access-Control-Allow-Headers' : '*',
+      'Content-Type': 'application/json',
+    })
 };
 
 @Injectable()
