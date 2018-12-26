@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Account } from '../_model/Account';
+import { Test } from '../_model/Test';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { Url} from '../url';
@@ -17,9 +17,9 @@ const httpOptions = {
 export class CreateTestService {
 
   constructor(private http: HttpClient) { }
-  login(account: Account): Observable <Login> {
-    return this.http.post<Login>(Url.URL + 'test/begin', account, httpOptions).pipe(
-      catchError(this.handleError <Login>('login'))
+  beginTest(test: Test): Observable <Login> {
+    return this.http.post<Login>(Url.URL + 'test/begin', test, httpOptions).pipe(
+      catchError(this.handleError <Login>('beginTest'))
     );
   }
 
