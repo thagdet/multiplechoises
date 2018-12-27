@@ -5,7 +5,7 @@
       <th>Name</th>
       <th>Credits</th>
       <th>Show Question</th>
-      <th>Do Test</th>
+      <th>Details</th>
     </tr>
     </thead>
     <tbody *ngFor="let subject of classOfAccount">
@@ -13,7 +13,7 @@
       <td>{{subject.idAccount_Subject.idSubject.name}}</td>
       <td>{{subject.idAccount_Subject.idSubject.credits}}</td>
       <td><a href="./question/subject/<%= subject.idAccount_Subject.idSubject._id%>" style="cursor: pointer"><i class="fas fa-th-list"></i></a></td>
-      <td><a routerLink="{{'/createTest'}}" (click)="getIdToCreateTest(subject.idAccount_Subject.idSubject._id)" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+      <td><a routerLink="{{'/TestDetail/Class/'+subject.idAccount_Subject.idSubject._id}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
     </tr>
     </tbody>
   </table>

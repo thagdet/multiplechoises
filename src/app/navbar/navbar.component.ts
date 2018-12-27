@@ -32,10 +32,9 @@ export class NavbarComponent implements OnInit {
   }
   logout() {
     localStorage.clear();
-    if (this.router.url === '/') {
-      location.reload();
-    } else {
+    if (this.router.url !== '/') {
       this.router.navigate(['/']);
     }
+    location.reload();
   }
 }

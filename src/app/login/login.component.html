@@ -44,7 +44,7 @@
         </div>
 
         <div class="container-login100-form-btn">
-          <button class="login100-form-btn" type="submit">
+          <button class="login100-form-btn" type="submit" [disabled]="!(formLogin.valid)">
             Login
           </button>
         </div>
