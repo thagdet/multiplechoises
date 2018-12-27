@@ -1,3 +1,20 @@
-<p>
-  class-of-account works!
-</p>
+<section class="main-content flex-1">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Credits</th>
+      <th>Show Question</th>
+      <th>Do Test</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let subject of classOfAccount">
+    <tr>
+      <td>{{subject.idAccount_Subject.idSubject.name}}</td>
+      <td>{{subject.idAccount_Subject.idSubject.credits}}</td>
+      <td><a href="./question/subject/<%= subject.idAccount_Subject.idSubject._id%>" style="cursor: pointer"><i class="fas fa-th-list"></i></a></td>
+      <td><a routerLink="{{'/createTest'}}" (click)="getIdToCreateTest(subject.idAccount_Subject.idSubject._id)" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+    </tr>
+    </tbody>
+  </table>
+</section>

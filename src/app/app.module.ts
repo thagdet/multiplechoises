@@ -37,9 +37,9 @@ import { ClassOfAccountService } from './_services/class-of-account.service';
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [
-    LoginService, 
-    SubjectService, 
-    CreateTestService, 
+    LoginService,
+    SubjectService,
+    CreateTestService,
     CreateTestComponent,
     ClassOfAccountService,
   ],
