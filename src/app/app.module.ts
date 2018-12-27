@@ -14,6 +14,8 @@ import { CreateTestService } from './_services/create-test.service';
 import { SubjectComponent } from './subject/subject.component';
 import { CreateTestComponent } from './create-test/create-test.component';
 import { SubjectService } from './_services/subject.service';
+import { ClassOfAccountComponent } from './class-of-account/class-of-account.component';
+import { ClassOfAccountService } from './_services/class-of-account.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { SubjectService } from './_services/subject.service';
     NavbarComponent,
     LoginComponent,
     SubjectComponent,
-    CreateTestComponent
+    CreateTestComponent,
+    ClassOfAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,13 @@ import { SubjectService } from './_services/subject.service';
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [LoginService, SubjectService, CreateTestService],
+  providers: [
+    LoginService, 
+    SubjectService, 
+    CreateTestService, 
+    CreateTestComponent,
+    ClassOfAccountService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

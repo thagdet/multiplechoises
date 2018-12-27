@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
-import {SubjectService} from '../_services/subject.service';
-import {Subject} from '../_model/Subject';
+import { SubjectService } from '../_services/subject.service';
+import { Subject } from '../_model/Subject';
+import { CreateTestComponent } from '../create-test/create-test.component';
 
 @Component({
   selector: 'app-subject',
@@ -12,12 +13,12 @@ export class SubjectComponent implements OnInit {
   subjects: Subject[] = [];
   constructor(
     private subjectService: SubjectService,
+    private createTestComponent: CreateTestComponent,
   ) { }
 
   ngOnInit() {
     this.onLoad();
   }
-
   onLoad() {
     this.subjectService.GetAllSubjectByIdAccount(localStorage.getItem('idAccount')).subscribe(
       value => {
@@ -38,5 +39,9 @@ export class SubjectComponent implements OnInit {
       () => {
         console.log('completed');
       });
+  }
+  getIdToCreateTest(idSubject) {
+    const idAccount = localStorage.getItem('idAccount');
+    this.createTestComponent.getTest(idAccount, idSubject);
   }
 }
