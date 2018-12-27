@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Test } from '../_model/Test';
+import { Question } from '../_model/Question';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
@@ -12,6 +13,7 @@ import { CreateTestService } from '../_services/create-test.service';
 })
 export class CreateTestComponent implements OnInit {
   formLogin: FormGroup;
+  questions: Question[] = [];
 
   @Input() test = new Test();
   constructor(private router: Router,
@@ -20,13 +22,17 @@ export class CreateTestComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getTest() 
   }
-  getTest() {
+  getTest(idAccount, idSubject) {
+    this.test.idClass = '5bf958072fa5eb302cb11ab5';
+    this.test.idTestDetail = '5bf96eb097ca28269c307669';
+    console.log(this.test)
     this.createTestService.beginTest(this.test).subscribe(
       value => {
         if (value.status) {
-          console.log('a');
+          const data = <Question[]>value.data;
+          this.questions = data;
+          console.log(this.questions);
         } else {
           console.log(value);
         }

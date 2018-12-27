@@ -1,8 +1,8 @@
 <body>
   <div class="container col-md-10">
     <form>
-      <div style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
-        <h3> ABC </h3>
+      <div *ngFor="let question of questions" style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
+        <h3>{{question}} </h3>
         <div class="form-check">
           <label>
             <input type="radio" name="radio"> Ahihi <span class="label-text"></span>

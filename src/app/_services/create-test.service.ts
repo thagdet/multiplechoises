@@ -8,9 +8,9 @@ import {Login} from '../_model/login';
 
 const httpOptions = {
   headers: new HttpHeaders({
-      'Access-Control-Allow-Headers' : '*',
-      'Content-Type': 'application/json',
-    })
+    'Access-Control-Allow-Headers' : '*',
+    'Content-Type': 'application/json',
+  }).set('Authorization', 'Bearer ' + localStorage.getItem('token'))
 };
 
 @Injectable()
