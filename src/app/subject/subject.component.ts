@@ -17,31 +17,6 @@ export class SubjectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.onLoad();
-  }
-  onLoad() {
-    this.subjectService.GetAllSubjectByIdAccount(localStorage.getItem('idAccount')).subscribe(
-      value => {
-        if (value.status) {
-          const data = <Subject[]>value.data;
-          this.subjects = data;
-        } else {
-          console.log('fault');
-          swal({
-            title: 'Failed',
-            html: value.message,
-            type: 'error'
-          });
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        console.log('completed');
-      });
-  }
-  getIdToCreateTest(idSubject) {
-    const idAccount = localStorage.getItem('idAccount');
-    this.createTestComponent.getTest(idAccount, idSubject);
+
   }
 }
