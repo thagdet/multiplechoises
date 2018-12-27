@@ -1,0 +1,82 @@
+<section class="main-content flex-1">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Description</th>
+      <th>Duration</th>
+      <th>Is Open</th>
+      <th>List Question Details</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let testDetail of testDetails">
+    <tr>
+      <td>{{testDetail.description}}</td>
+      <td>{{testDetail.duration}}</td>
+      <td><a style="cursor: pointer"><i class="fas fa-th-list"></i></a></td>
+      <td><a routerLink="{{'/TestDetail/Detail/'+testDetail._id}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+    </tr>
+    </tbody>
+  </table>
+  <button data-toggle="modal" data-target="#CreateTestDetail"> New </button>
+</section>
+
+<div class="modal fade" id="CreateTestDetail" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" name="CreateTestDetailForm" #CreateTestDetailForm="ngForm" [formGroup]="formCreateTestDetail" (ngSubmit)="onSubmitCreateTestDetail()">
+            <span class="login100-form-logo">
+                <img src="../../assets/images/logo.png" width="180" height="70">
+            </span>
+        <span class="login100-form-title p-b-34 p-t-27">
+                New Test Detail
+              <button id="closeCreateTestDetailModal" type="button" class="close" data-dismiss="modal" style="display:none"></button>
+            </span>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="text" class="input100"
+                 [(ngModel)]="testDetail.description" formControlName="description" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Description"></span>
+          <mat-error *ngFor="let validation of validation_messages.description">
+            <mat-error class="error-message"
+                       *ngIf="formCreateTestDetail.get('description').hasError(validation.type) && (formCreateTestDetail.get('description').dirty || formCreateTestDetail.get('description').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="number" class="input100"
+                 [(ngModel)]="testDetail.duration" formControlName="duration" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Duration"></span>
+          <mat-error *ngFor="let validation of validation_messages.duration">
+            <mat-error class="error-message"
+                       *ngIf="formCreateTestDetail.get('duration').hasError(validation.type) && (formCreateTestDetail.get('duration').dirty || formCreateTestDetail.get('duration').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="number" class="input100"
+                 [(ngModel)]="testDetail.quantityOfQuestions" formControlName="quantityOfQuestions" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Quantity Of Questions"></span>
+          <mat-error *ngFor="let validation of validation_messages.quantityOfQuestions">
+            <mat-error class="error-message"
+                       *ngIf="formCreateTestDetail.get('quantityOfQuestions').hasError(validation.type) && (formCreateTestDetail.get('quantityOfQuestions').dirty || formCreateTestDetail.get('quantityOfQuestions').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" type="submit" [disabled]="!(formCreateTestDetail.valid)">
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

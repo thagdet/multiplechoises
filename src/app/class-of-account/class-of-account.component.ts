@@ -21,6 +21,7 @@ export class ClassOfAccountComponent implements OnInit {
   onLoad() {
     this.classOfAccountService.GetAllSubjectByIdAccount(localStorage.getItem('idAccount')).subscribe(
       value => {
+        // console.log(value);
         if (value.status) {
           const data = <Subject[]>value.data;
           this.classOfAccount = data;
