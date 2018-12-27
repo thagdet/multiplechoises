@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subject} from '../_model/Subject';
 import swal from 'sweetalert2';
+import {ClassOfAccountService} from '../_services/class-of-account.service';
 
 @Component({
   selector: 'app-class-of-account',
@@ -8,19 +9,21 @@ import swal from 'sweetalert2';
   styleUrls: ['./class-of-account.component.css']
 })
 export class ClassOfAccountComponent implements OnInit {
-
-  constructor() { }
+  classOfAccount: Subject[];
+  constructor(
+    private classOfAccountService: ClassOfAccountService,
+  ) { }
 
   ngOnInit() {
     this.onLoad();
   }
 
   onLoad() {
-    this.subjectService.GetAllSubjectByIdAccount(localStorage.getItem('idAccount')).subscribe(
+    this.classOfAccountService.GetAllSubjectByIdAccount(localStorage.getItem('idAccount')).subscribe(
       value => {
         if (value.status) {
           const data = <Subject[]>value.data;
-          this.subjects = data;
+          this.classOfAccount = data;
         } else {
           console.log('fault');
           swal({
