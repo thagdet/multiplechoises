@@ -2,25 +2,23 @@
   <table class="table table-hover">
     <thead>
     <tr>
-      <th>Description</th>
-      <th>Duration</th>
-      <th>Is Open</th>
-      <th>List Question Details</th>
+      <th>Content</th>
+      <th>Answer</th>
+      <th>Edit</th>
     </tr>
     </thead>
-    <tbody *ngFor="let testDetail of testDetails">
+    <tbody *ngFor="let question of questions">
     <tr>
-      <td>{{testDetail.description}}</td>
-      <td>{{testDetail.duration}}</td>
-      <td><a style="cursor: pointer"><input type="checkbox" [(ngModel)]="testDetail.isOpen" (change) = updateTestDetail(testDetail)></a></td>
-      <td><a routerLink="{{'/TestDetail/Detail/'+testDetail._id}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+      <td><textarea style="overflow: hidden; border: none; width: 500px; height: 150px;">{{question.content}}</textarea></td>
+      <td><div *ngFor="let answer of question.listIdAnswer, let i = index"><input style="margin-bottom: 10px; border: none" name="answer{{i}}" class="answer{{i}}" type="text" value="{{answer.content}}"></div></td>
+      <td><a><i class="fas fa-edit"></i></a></td>
     </tr>
     </tbody>
   </table>
-  <button data-toggle="modal" data-target="#CreateTestDetail"> New </button>
+  <button data-toggle="modal" data-target="#CreateQuestion"> New </button>
 </section>
 
-<div class="modal fade" id="CreateTestDetail" role="dialog" tabindex="-1">
+<!--<div class="modal fade" id="CreateQuestion" role="dialog" tabindex="-1">
   <div class="modal-dialog">
     <div class="wrap-login100">
       <form class="login100-form validate-form" name="CreateTestDetailForm" #CreateTestDetailForm="ngForm" [formGroup]="formCreateTestDetail" (ngSubmit)="onSubmitCreateTestDetail()">
@@ -79,4 +77,4 @@
       </form>
     </div>
   </div>
-</div>
+</div>-->

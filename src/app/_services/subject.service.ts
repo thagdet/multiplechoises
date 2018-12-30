@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Url} from '../url';
 import {catchError} from 'rxjs/operators';
-import {Login} from '../_model/login';
+import {Res} from '../_model/Res';
 
 const httpOptions = {
   headers: new HttpHeaders({

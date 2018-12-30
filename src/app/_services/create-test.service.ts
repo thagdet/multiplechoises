@@ -4,7 +4,7 @@ import { Test } from '../_model/Test';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { Url} from '../url';
-import {Login} from '../_model/login';
+import {Res} from '../_model/Res';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,9 +17,9 @@ const httpOptions = {
 export class CreateTestService {
 
   constructor(private http: HttpClient) { }
-  beginTest(test: Test): Observable <Login> {
-    return this.http.post<Login>(Url.URL + 'test/begin', test, httpOptions).pipe(
-      catchError(this.handleError <Login>('beginTest'))
+  beginTest(test: Test): Observable <Res> {
+    return this.http.post<Res>(Url.URL + 'test/begin', test, httpOptions).pipe(
+      catchError(this.handleError <Res>('beginTest'))
     );
   }
 

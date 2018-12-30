@@ -5,4 +5,3 @@ export class Question {
     public listIdAnswer: any;
     public idCorrectAnswer: string;
 }
-  
