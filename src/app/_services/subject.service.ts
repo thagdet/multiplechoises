@@ -9,16 +9,16 @@ const httpOptions = {
   headers: new HttpHeaders({
     'Access-Control-Allow-Headers' : '*',
     'Content-Type': 'application/json',
-  }).set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+  }).set('Authorization', 'Bearer ' + localStorage.getItem('token'))  
 };
 
 @Injectable()
 export class SubjectService {
 
   constructor(private http: HttpClient) { }
-  GetAllSubjectByIdAccount(id: string): Observable <Res> {
-    return this.http.get<Res>(Url.URL + 'class/idAccount/' + id, httpOptions).pipe(
-      catchError(this.handleError <Res>('GetAllSubjectByIdAccount'))
+  GetAllSubjectNotSigned(idAccount: string): Observable <Login> {
+    return this.http.get<Login>(Url.URL + 'subject/notSigned/' + idAccount, httpOptions).pipe(
+      catchError(this.handleError <Login>('GetAllSubjectNotSigned'))
     );
   }
 
