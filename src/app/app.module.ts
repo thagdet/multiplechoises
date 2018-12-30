@@ -17,7 +17,9 @@ import { SubjectService } from './_services/subject.service';
 import { ClassOfAccountComponent } from './class-of-account/class-of-account.component';
 import { ClassOfAccountService } from './_services/class-of-account.service';
 import { ListTestDetailComponent } from './list-test-detail/list-test-detail.component';
-import {TestDetailService} from './_services/test-detail.service';
+import { TestDetailService } from './_services/test-detail.service';
+import { QuestionComponent } from './question/question.component';
+import { QuestionService } from './_services/question.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import {TestDetailService} from './_services/test-detail.service';
     CreateTestComponent,
     ClassOfAccountComponent,
     ListTestDetailComponent,
+    QuestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import {TestDetailService} from './_services/test-detail.service';
     CreateTestService,
     CreateTestComponent,
     ClassOfAccountService,
-    TestDetailService
+    TestDetailService,
+    QuestionService
   ],
   bootstrap: [AppComponent]
 })

@@ -13,12 +13,13 @@ const httpOptions = {
 };
 
 @Injectable()
-export class ClassOfAccountService {
+export class QuestionService {
 
   constructor(private http: HttpClient) { }
-  GetAllSubjectByIdAccount(id: string): Observable <Res> {
-    return this.http.get<Res>(Url.URL + 'class/idAccount/' + id, httpOptions).pipe(
-      catchError(this.handleError <Res>('GetAllSubjectByIdAccount'))
+
+  GetAllQuestionByIdSubject(idSubject: string): Observable <Res> {
+    return this.http.get<Res>(Url.URL + 'question/subject/' + idSubject, httpOptions).pipe(
+      catchError(this.handleError <Res>('GetAllQuestionByIdSubject'))
     );
   }
 

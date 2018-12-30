@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TestDetail} from '../_model/TestDetail';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Account} from '../_model/Account';
 import swal from 'sweetalert2';
 import {TestDetailService} from '../_services/test-detail.service';
 
@@ -45,15 +44,40 @@ export class ListTestDetailComponent implements OnInit {
       duration: new FormControl('', [Validators.required, Validators.min(10), Validators.max(180)]),
       quantityOfQuestions: new FormControl('', [Validators.required, Validators.min(10), Validators.max(60)])
     });
-  }
 
-  onSubmitCreateTestDetail() {
     this.sub = this.route.params.subscribe(params => {
       this.testDetail.idSubject = params['idSubject'];
     });
+
+    this.OnLoad();
+  }
+
+  OnLoad() {
+    this.testDetailService.GetAllTestDetailByIdSubject(this.testDetail.idSubject).subscribe(
+      value => {
+        // console.log(value);
+        if (value.status) {
+          const data = <TestDetail[]>value.data;
+          this.testDetails = data;
+        } else {
+          console.log('fault');
+          swal({
+            title: 'Failed',
+            html: value.message,
+            type: 'error'
+          });
+        }
+      }, error => {
+        console.log(error);
+      },
+      () => {
+        console.log('completed');
+      });
+  }
+  onSubmitCreateTestDetail() {
     this.testDetailService.CreateTestDetail(this.testDetail).subscribe(
       value => {
-        console.log(value);
+        // console.log(value);
         if (value.status) {
           // const data = <TestDetail>value.data;
           document.getElementById('closeLoginModal').click();
@@ -63,6 +87,33 @@ export class ListTestDetailComponent implements OnInit {
             type: 'success'
           });
           location.reload();
+        } else {
+          console.log('fault');
+          swal({
+            title: 'Failed',
+            html: value.message,
+            type: 'error'
+          });
+        }
+      }, error => {
+        console.log(error);
+      },
+      () => {
+        console.log('completed');
+      });
+  }
+
+  updateTestDetail(testDetail: TestDetail) {
+    this.testDetailService.UpdateTestDetail(testDetail).subscribe(
+      value => {
+        // console.log(value);
+        if (value.status) {
+          // const data = <TestDetail>value.data;
+          swal({
+            title: 'SUCCESS',
+            html: value.message,
+            type: 'success'
+          });
         } else {
           console.log('fault');
           swal({

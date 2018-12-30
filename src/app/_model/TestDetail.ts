@@ -1,4 +1,5 @@
 export class TestDetail {
+  public _id: string;
   public listIdQuestion: any;
   public description: string;
   public isOpen: boolean;

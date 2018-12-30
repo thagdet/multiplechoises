@@ -32,8 +32,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.account);
     this.loginService.login(this.account).subscribe(
       value => {
+        console.log(value);
         if (value.status) {
           const data = <Account>value.data;
           localStorage.setItem('token', value.token);
@@ -45,7 +47,7 @@ export class LoginComponent implements OnInit {
             html: value.message,
             type: 'success'
           });
-          location.reload();
+          // location.reload();
         } else {
           console.log('fault');
           swal({

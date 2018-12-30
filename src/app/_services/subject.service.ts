@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Url} from '../url';
 import {catchError} from 'rxjs/operators';
-import {Login} from '../_model/login';
+import {Res} from '../_model/Res';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,9 +16,9 @@ const httpOptions = {
 export class SubjectService {
 
   constructor(private http: HttpClient) { }
-  GetAllSubjectByIdAccount(id: string): Observable <Login> {
-    return this.http.get<Login>(Url.URL + 'class/idAccount/' + id, httpOptions).pipe(
-      catchError(this.handleError <Login>('GetAllSubjectByIdAccount'))
+  GetAllSubjectByIdAccount(id: string): Observable <Res> {
+    return this.http.get<Res>(Url.URL + 'class/idAccount/' + id, httpOptions).pipe(
+      catchError(this.handleError <Res>('GetAllSubjectByIdAccount'))
     );
   }
 
