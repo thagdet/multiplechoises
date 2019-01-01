@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.account);
+    // console.log(this.account);
     this.loginService.login(this.account).subscribe(
       value => {
         console.log(value);
@@ -41,13 +41,15 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', value.token);
           localStorage.setItem('username', data.UserName);
           localStorage.setItem('idAccount', data._id);
+          localStorage.setItem('IdRole', data.IdRole);
           document.getElementById('closeLoginModal').click();
           swal({
             title: 'SUCCESS',
             html: value.message,
             type: 'success'
           });
-          // location.reload();
+          location.reload();
+          this.router.navigate(['/class']);
         } else {
           console.log('fault');
           swal({

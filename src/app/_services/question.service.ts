@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {Res} from '../_model/Res';
 import {Url} from '../url';
 import {catchError} from 'rxjs/operators';
+import {Question} from '../_model/Question';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,6 +21,24 @@ export class QuestionService {
   GetAllQuestionByIdSubject(idSubject: string): Observable <Res> {
     return this.http.get<Res>(Url.URL + 'question/subject/' + idSubject, httpOptions).pipe(
       catchError(this.handleError <Res>('GetAllQuestionByIdSubject'))
+    );
+  }
+
+  UpdateQuestion(question: Question): Observable <Res> {
+    return this.http.put<Res>(Url.URL + 'question/update/' + question._id, question, httpOptions).pipe(
+      catchError(this.handleError <Res>('UpdateQuestion'))
+    );
+  }
+
+  CreateQuestion(question: any): Observable <Res> {
+    return this.http.post<Res>(Url.URL + 'question/create', question, httpOptions).pipe(
+      catchError(this.handleError <Res>('CreateQuestion'))
+    );
+  }
+
+  DeleteQuestion(id: string): Observable <Res> {
+    return this.http.delete<Res>(Url.URL + 'question/delete/' + id, httpOptions).pipe(
+      catchError(this.handleError <Res>('CreateQuestion'))
     );
   }
 

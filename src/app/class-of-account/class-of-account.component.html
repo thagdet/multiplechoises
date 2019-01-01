@@ -9,11 +9,11 @@
     </tr>
     </thead>
     <tbody *ngFor="let subject of classOfAccount">
-    <tr>
+    <tr routerLink="{{'/TestDetail/Class/'+subject.idAccount_Subject.idSubject._id}}">
       <td>{{subject.idAccount_Subject.idSubject.name}}</td>
       <td>{{subject.idAccount_Subject.idSubject.credits}}</td>
       <td><a routerLink="{{'/Question/Subject/'+subject.idAccount_Subject.idSubject._id}}" style="cursor: pointer"><i class="fas fa-th-list"></i></a></td>
-      <td><a routerLink="{{'/TestDetail/Class/'+subject.idAccount_Subject.idSubject._id}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+      <td><a style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
     </tr>
     </tbody>
   </table>

@@ -4,5 +4,5 @@ export class Account {
   public Password: string;
   public Facebook?: string;
   public Gmail?: string;
-  public IdRole?: number;
+  public IdRole?: string;
 }

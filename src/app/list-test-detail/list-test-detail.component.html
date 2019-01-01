@@ -6,6 +6,7 @@
       <th>Duration</th>
       <th>Is Open</th>
       <th>List Question Details</th>
+      <th>Do Test</th>
     </tr>
     </thead>
     <tbody *ngFor="let testDetail of testDetails">
@@ -13,7 +14,8 @@
       <td>{{testDetail.description}}</td>
       <td>{{testDetail.duration}}</td>
       <td><a style="cursor: pointer"><input type="checkbox" [(ngModel)]="testDetail.isOpen" (change) = updateTestDetail(testDetail)></a></td>
-      <td><a routerLink="{{'/TestDetail/Detail/'+testDetail._id}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+      <td><a (click)="showQuestion(testDetail._id)" routerLink="{{'/TestDetail/Detail'}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+      <td><a *ngIf="testDetail.isOpen" routerLink="{{'/createTest'}}"><i class="fas fa-pen"></i></a></td>
     </tr>
     </tbody>
   </table>

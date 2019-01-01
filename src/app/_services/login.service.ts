@@ -13,6 +13,13 @@ const httpOptions = {
     })
 };
 
+const httpOptions2 = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Headers' : '*',
+    'Content-Type': 'application/json',
+  }).set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+};
+
 @Injectable()
 export class LoginService {
 
@@ -20,6 +27,13 @@ export class LoginService {
   login(account: Account): Observable <Res> {
     return this.http.post<Res>(Url.URL + 'account/checklogin', account, httpOptions).pipe(
       catchError(this.handleError <Res>('login'))
+    );
+  }
+
+  register(account: Account): Observable <Res> {
+    // httpOptions.headers.set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post<Res>(Url.URL + 'account/create', account, httpOptions2).pipe(
+      catchError(this.handleError <Res>('register'))
     );
   }
 

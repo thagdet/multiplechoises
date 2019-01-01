@@ -4,6 +4,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 import {TestDetailService} from '../_services/test-detail.service';
+import {CreateTestComponent} from '../create-test/create-test.component';
+import {Question} from '../_model/Question';
+import {QuestionComponent} from '../question/question.component';
 
 @Component({
   selector: 'app-list-test-detail',
@@ -36,6 +39,8 @@ export class ListTestDetailComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private testDetailService: TestDetailService,
+    private createTest: CreateTestComponent,
+    private question: QuestionComponent,
   ) { }
 
   ngOnInit() {
@@ -128,5 +133,13 @@ export class ListTestDetailComponent implements OnInit {
       () => {
         console.log('completed');
       });
+  }
+
+  /*doTest(IDTestDetail) {
+    this.createTest.getTest(this.testDetail.idSubject, IDTestDetail);
+  }*/
+
+  showQuestion(IDTestDetail) {
+    this.question.getIdTestDetail(IDTestDetail);
   }
 }
