@@ -1,7 +1,7 @@
-<body>
+<section>
   <div class="container col-md-10">
-    <form>
-      <div *ngFor="let question of questions" style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
+    <form *ngFor="let question of questions">
+      <div style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
         <h3>{{question}} </h3>
         <div class="form-check">
           <label>
@@ -11,4 +11,4 @@
       </div>
     </form>
   </div>
-</body>
+</section>

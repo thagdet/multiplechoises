@@ -5,76 +5,82 @@
       <th>Content</th>
       <th>Answer</th>
       <th>Edit</th>
+      <th>Delete</th>
     </tr>
     </thead>
     <tbody *ngFor="let question of questions">
     <tr>
-      <td><textarea style="overflow: hidden; border: none; width: 500px; height: 150px;">{{question.content}}</textarea></td>
-      <td><div *ngFor="let answer of question.listIdAnswer, let i = index"><input style="margin-bottom: 10px; border: none" name="answer{{i}}" class="answer{{i}}" type="text" value="{{answer.content}}"></div></td>
-      <td><a><i class="fas fa-edit"></i></a></td>
+      <td><textarea [(ngModel)]="question.content" style="overflow: hidden; border: none; width: 500px; height: 150px;">{{question.content}}</textarea></td>
+      <td><div *ngFor="let answer of question.listIdAnswer, let i = index"><textarea [(ngModel)]="answer.content" style="margin-bottom: 10px; overflow: hidden; border: none; width: 400px;" name="answer{{i}}" class="answer{{i}}" type="text"></textarea></div></td>
+      <td><a (click)="UpdateQuestion(question)"><i class="fas fa-edit"></i></a></td>
+      <td><a (click)="DeleteQuestion(question._id)"><i class="fas fa-trash-alt"></i></a></td>
     </tr>
     </tbody>
   </table>
   <button data-toggle="modal" data-target="#CreateQuestion"> New </button>
 </section>
 
-<!--<div class="modal fade" id="CreateQuestion" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="wrap-login100">
-      <form class="login100-form validate-form" name="CreateTestDetailForm" #CreateTestDetailForm="ngForm" [formGroup]="formCreateTestDetail" (ngSubmit)="onSubmitCreateTestDetail()">
-            <span class="login100-form-logo">
-                <img src="../../assets/images/logo.png" width="180" height="70">
-            </span>
-        <span class="login100-form-title p-b-34 p-t-27">
-                New Test Detail
-              <button id="closeCreateTestDetailModal" type="button" class="close" data-dismiss="modal" style="display:none"></button>
-            </span>
-
-        <mat-form-field class="wrap-input100 validate-input">
-          <input matInput type="text" class="input100"
-                 [(ngModel)]="testDetail.description" formControlName="description" required
-                 maxlength="50">
-          <span class="focus-input100" data-placeholder="Description"></span>
-          <mat-error *ngFor="let validation of validation_messages.description">
-            <mat-error class="error-message"
-                       *ngIf="formCreateTestDetail.get('description').hasError(validation.type) && (formCreateTestDetail.get('description').dirty || formCreateTestDetail.get('description').touched)">
-              {{validation.message}}
-            </mat-error>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="wrap-input100 validate-input">
-          <input matInput type="number" class="input100"
-                 [(ngModel)]="testDetail.duration" formControlName="duration" required
-                 maxlength="50">
-          <span class="focus-input100" data-placeholder="Duration"></span>
-          <mat-error *ngFor="let validation of validation_messages.duration">
-            <mat-error class="error-message"
-                       *ngIf="formCreateTestDetail.get('duration').hasError(validation.type) && (formCreateTestDetail.get('duration').dirty || formCreateTestDetail.get('duration').touched)">
-              {{validation.message}}
-            </mat-error>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="wrap-input100 validate-input">
-          <input matInput type="number" class="input100"
-                 [(ngModel)]="testDetail.quantityOfQuestions" formControlName="quantityOfQuestions" required
-                 maxlength="50">
-          <span class="focus-input100" data-placeholder="Quantity Of Questions"></span>
-          <mat-error *ngFor="let validation of validation_messages.quantityOfQuestions">
-            <mat-error class="error-message"
-                       *ngIf="formCreateTestDetail.get('quantityOfQuestions').hasError(validation.type) && (formCreateTestDetail.get('quantityOfQuestions').dirty || formCreateTestDetail.get('quantityOfQuestions').touched)">
-              {{validation.message}}
-            </mat-error>
-          </mat-error>
-        </mat-form-field>
-
-        <div class="container-login100-form-btn">
-          <button class="login100-form-btn" type="submit" [disabled]="!(formCreateTestDetail.valid)">
-            Create
-          </button>
-        </div>
-      </form>
+<div class="modal fade" id="CreateQuestion" role="dialog" tabindex="-1">
+  <div class="modal-dialog" style="width: 1200px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id="closeCreateQuestionModal" data-dismiss="modal" style="display: none"></button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Content</th>
+            <th>Answer</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let question of newQuestions, let j = index">
+            <td>
+              <textarea [(ngModel)]="question.content" style="overflow: hidden; width: 500px; height: 200px;">{{question.content}}</textarea>
+            </td>
+            <td>
+              <div *ngFor="let answer of question.listIdAnswer, let i = index">
+                <textarea [(ngModel)]="answer.content" style="margin-bottom: 10px; overflow: hidden; width: 400px;" name="answer{{i}}" class="answer{{i}}" type="text"></textarea>
+              </div>
+            </td>
+            <td><a (click)="DeleteNewQuestion(j)"><i class="fas fa-trash-alt"></i></a></td>
+          </tr>
+          <tr name="createQuestionForm" #createQuestionForm="ngForm" [formGroup]="formCreateQuestion">
+            <td>
+              <mat-form-field>
+                <textarea matInput [(ngModel)]="newQuestion.content" formControlName="content" style="height: 200px; width: 500px" type="text"></textarea>
+                <mat-error *ngFor="let validation of validation_messages.content">
+                  <mat-error class="error-message"
+                             *ngIf="formCreateQuestion.get('content').hasError(validation.type) && (formCreateQuestion.get('content').dirty || formCreateQuestion.get('content').touched)">
+                    {{validation.message}}
+                  </mat-error>
+                </mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <div *ngFor="let answer of newQuestion.listIdAnswer, let i = index">
+                <mat-form-field>
+                  <textarea matInput [(ngModel)]="answer.content" formControlName="contentAnswer{{i}}" style="width: 400px;" name="answer{{i}}" class="answer{{i}}" type="text"></textarea>
+                  <mat-error *ngFor="let validation of validation_messages.contentAnswer">
+                    <mat-error class="error-message"
+                               *ngIf="formCreateQuestion.get('contentAnswer'+i).hasError(validation.type) && (formCreateQuestion.get('contentAnswer'+i).dirty || formCreateQuestion.get('contentAnswer'+i).touched)">
+                      {{validation.message}}
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" (click)="addNewQuestion()" [disabled]="!(formCreateQuestion.valid)"><i class="fas fa-plus-square"></i></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="OnSubmitAddNewQuestion()" class="btn btn-primary">Submit</button>
+      </div>
     </div>
   </div>
-</div>-->
+</div>

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Test } from '../_model/Test';
 import { Question } from '../_model/Question';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 import { CreateTestService } from '../_services/create-test.service';
 
@@ -12,21 +12,23 @@ import { CreateTestService } from '../_services/create-test.service';
   styleUrls: ['./create-test.component.css']
 })
 export class CreateTestComponent implements OnInit {
-  formLogin: FormGroup;
-  questions: Question[] = [];
+  questions: Question[];
 
   @Input() test = new Test();
-  constructor(private router: Router,
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder,
     private createTestService: CreateTestService,
   ) { }
 
   ngOnInit() {
+    this.questions = <Question[]>this.route.snapshot.data.DataValue.data;
   }
-  getTest(idAccount, idSubject) {
-    this.test.idClass = '5bf958072fa5eb302cb11ab5';
-    this.test.idTestDetail = '5bf96eb097ca28269c307669';
-    console.log(this.test)
+  /*getTest(idSubject, idTestDetail) {
+    this.test.idSubject = idSubject;
+    this.test.idTestDetail = idTestDetail;
+    this.test.idAccount = localStorage.getItem('idAccount');
     this.createTestService.beginTest(this.test).subscribe(
       value => {
         if (value.status) {
@@ -42,5 +44,6 @@ export class CreateTestComponent implements OnInit {
       () => {
         console.log('completed');
       });
-  }
+  }*/
+
 }
