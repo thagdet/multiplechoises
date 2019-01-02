@@ -141,8 +141,9 @@ export class ListTestDetailComponent implements OnInit {
 
   Notificate() {
     swal({
-      imageUrl: '../../assets/images/loading.gif',
-      imageAlt: 'Loading ...'
+      imageUrl: '../../assets/images/loading3.gif',
+      imageAlt: 'Loading ...',
+      showConfirmButton: false
     });
   }
 

@@ -2,10 +2,10 @@
   <div class="container col-md-10">
     <form *ngFor="let question of questions">
       <div style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
-        <h3>{{question}} </h3>
-        <div class="form-check">
+        <h4 style="line-height: 30px" [innerHTML] = "question.content"></h4>
+        <div class="form-check" *ngFor="let answer of question.listIdAnswer">
           <label>
-            <input type="radio" name="radio"> Ahihi <span class="label-text"></span>
+            <input type="radio" name="radio"><span class="label-text"> {{answer.content}}</span>
           </label>
         </div>
       </div>
