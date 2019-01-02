@@ -139,6 +139,13 @@ export class ListTestDetailComponent implements OnInit {
     this.createTest.getTest(this.testDetail.idSubject, IDTestDetail);
   }*/
 
+  Notificate() {
+    swal({
+      imageUrl: '../../assets/images/loading.gif',
+      imageAlt: 'Loading ...'
+    });
+  }
+
   showQuestion(IDTestDetail) {
     this.question.getIdTestDetail(IDTestDetail);
   }

@@ -20,7 +20,7 @@ import { ListTestDetailComponent } from './list-test-detail/list-test-detail.com
 import { TestDetailService } from './_services/test-detail.service';
 import { QuestionComponent } from './question/question.component';
 import { QuestionService } from './_services/question.service';
-import { Resolver } from './resovler';
+import { Resolver } from './create-test/resovler';
 
 @NgModule({
   declarations: [

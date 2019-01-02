@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 import { CreateTestService } from '../_services/create-test.service';
+import {Res} from '../_model/Res';
 
 @Component({
   selector: 'app-create-test',
@@ -23,7 +24,18 @@ export class CreateTestComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.questions = <Question[]>this.route.snapshot.data.DataValue.data;
+    const value = <Res>this.route.snapshot.data.DataValue;
+    if (value.status) {
+      const data = <Question[]>value.data;
+      this.questions = data;
+      console.log(this.questions);
+    } else {
+      swal({
+        title: 'Failed',
+        html: value.message,
+        type: 'error'
+      });
+    }
   }
   /*getTest(idSubject, idTestDetail) {
     this.test.idSubject = idSubject;

@@ -2,12 +2,13 @@
 import {Injectable, Input} from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CreateTestService} from './_services/create-test.service';
-import { Test } from './_model/Test';
-import {Question} from './_model/Question';
+import { CreateTestService} from '../_services/create-test.service';
+import { Test } from '../_model/Test';
+import {Question} from '../_model/Question';
+import {Res} from '../_model/Res';
 
 @Injectable()
-export class Resolver implements Resolve<Observable<any>> {
+export class Resolver implements Resolve<Res> {
   constructor(private createTestService: CreateTestService) { }
 
   @Input() test = new Test();
