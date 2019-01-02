@@ -11,7 +11,7 @@
     <tr>
       <td>{{subject.name}}</td>
       <td>{{subject.credits}}</td>
-      <td><a href="" style="cursor: pointer"><i class="fas fa-sign-in-alt"></i></a></td>
+      <td><a (click) = "onClickJoinButton(subject._id)" style="cursor: pointer"><i class="fas fa-sign-in-alt"></i></a></td>
     </tr>
     </tbody>
   </table>
