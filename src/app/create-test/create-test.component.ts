@@ -24,11 +24,14 @@ export class CreateTestComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    swal.close();
     const value = <Res>this.route.snapshot.data.DataValue;
     if (value.status) {
       const data = <Question[]>value.data;
       this.questions = data;
-      console.log(this.questions);
+      for (let i = 0; i < this.questions.length; i++) {
+        this.questions[i].content = this.questions[i].content.replace(/\n/g, '<br>');
+      }
     } else {
       swal({
         title: 'Failed',
@@ -44,8 +47,10 @@ export class CreateTestComponent implements OnInit {
     this.createTestService.beginTest(this.test).subscribe(
       value => {
         if (value.status) {
-          const data = <Question[]>value.data;
-          this.questions = data;
+          this.questions = <Question[]>value.data;
+          for (let i = 0; i < this.questions.length; i++) {
+            this.questions[i].content = this.questions[i].content.replace(/\n/g, '<br>');
+          }
           console.log(this.questions);
         } else {
           console.log(value);
