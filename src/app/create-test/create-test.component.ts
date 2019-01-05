@@ -1,11 +1,13 @@
-import {Component, Input, OnInit, Renderer2} from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { Question } from '../_model/Question';
-import {FormBuilder, FormControl, FormGroup, NgForm, NgModel, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, NgForm, NgModel, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { CreateTestService } from '../_services/create-test.service';
-import {Test} from '../_model/Test';
-import {Dataservice} from '../list-test-detail/dataservice';
+import { Test } from '../_model/Test';
+import { Dataservice } from '../list-test-detail/dataservice';
+import { timer } from 'rxjs';
+import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
 
 @Component({
   selector: 'app-create-test',
@@ -17,7 +19,13 @@ export class CreateTestComponent implements OnInit {
   numberOfQuestion: number;
   test = new Test();
   idClass: string;
+  duration: number;
+  duration2: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
   flag = true;
+  interval;
   results: {
     idQuestion: string,
     idAnswer: string,
@@ -48,7 +56,8 @@ export class CreateTestComponent implements OnInit {
       idTestDetail: this.test.idTestDetail,
       idClass: this.idClass,
       data: this.results,
-      count: this.numberOfQuestion
+      count: this.numberOfQuestion,
+      timeComplete: this.duration2 - this.duration
     };
     // console.log(data);
     swal({
@@ -69,9 +78,9 @@ export class CreateTestComponent implements OnInit {
           for (let i = 0; i < value.data.posts.length; i++) {
             // console.log(i + '_' + val.correctAnswer);
             if (value.data.posts[i].selectedAnswer) {
-              document.getElementById(i + '_' + value.data.posts[i].selectedAnswer ).style.color = 'Red';
+              document.getElementById(i + '_' + value.data.posts[i].selectedAnswer).style.color = 'Red';
             }
-            document.getElementById(i + '_' + value.data.posts[i].correctAnswer ).style.color = '#00ff00';
+            document.getElementById(i + '_' + value.data.posts[i].correctAnswer).style.color = '#00ff00';
           }
         } else {
           console.log(value);
@@ -98,6 +107,8 @@ export class CreateTestComponent implements OnInit {
         if (value.status) {
           this.questions = <Question[]>value.data.questions;
           this.idClass = value.data.idClass;
+          this.duration = value.data.duration * 60;
+          this.duration2 = value.data.duration * 60;
           this.numberOfQuestion = this.questions.length;
           this.results = new Array(this.numberOfQuestion);
           for (let i = 0; i < this.questions.length; i++) {
@@ -107,6 +118,18 @@ export class CreateTestComponent implements OnInit {
               idAnswer: null,
             };
           }
+
+          this.interval = setInterval(() => {
+            if (this.duration > 0) {
+              this.hours = Math.floor((this.duration % ( 60 * 60 * 24)) / ( 60 * 60));
+              this.minutes = Math.floor((this.duration % ( 60 * 60)) / ( 60));
+              this.seconds = Math.floor((this.duration % ( 60)));    
+              this.duration--;
+            } else {
+              this.onSubmitText();
+              clearInterval(this.interval);
+            }
+          }, 1000)
         } else {
           swal({
             title: 'Failed',
