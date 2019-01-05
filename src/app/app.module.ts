@@ -20,7 +20,7 @@ import { ListTestDetailComponent } from './list-test-detail/list-test-detail.com
 import { TestDetailService } from './_services/test-detail.service';
 import { QuestionComponent } from './question/question.component';
 import { QuestionService } from './_services/question.service';
-import { Resolver } from './create-test/resovler';
+import {Dataservice} from './list-test-detail/dataservice';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,6 @@ import { Resolver } from './create-test/resovler';
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [
-    Resolver,
     LoginService,
     SubjectService,
     CreateTestService,
@@ -52,7 +51,8 @@ import { Resolver } from './create-test/resovler';
     CreateTestComponent,
     ClassOfAccountService,
     TestDetailService,
-    QuestionService
+    QuestionService,
+    Dataservice
   ],
   bootstrap: [AppComponent]
 })

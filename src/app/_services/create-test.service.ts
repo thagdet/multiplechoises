@@ -23,6 +23,12 @@ export class CreateTestService {
     );
   }
 
+  submitText(result: any): Observable <Res> {
+    return this.http.post<Res>(Url.URL + 'test/mark', result, httpOptions).pipe(
+      catchError(this.handleError <Res>('submitText'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (response: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
