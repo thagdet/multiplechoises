@@ -1,22 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {TestDetail} from '../_model/TestDetail';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 import {TestDetailService} from '../_services/test-detail.service';
-import {CreateTestComponent} from '../create-test/create-test.component';
-import {Question} from '../_model/Question';
 import {QuestionComponent} from '../question/question.component';
+import {Dataservice} from './dataservice';
 
 @Component({
   selector: 'app-list-test-detail',
   templateUrl: './list-test-detail.component.html',
   styleUrls: ['./list-test-detail.component.css']
 })
-export class ListTestDetailComponent implements OnInit {
+export class ListTestDetailComponent implements OnInit, OnDestroy {
   formCreateTestDetail: FormGroup;
   testDetails: TestDetail[];
   private sub: any;
+  idTestDetail: string;
 
   validation_messages = {
     'description': [{type: 'required', message: 'Description is required'}],
@@ -39,7 +39,7 @@ export class ListTestDetailComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private testDetailService: TestDetailService,
-    private createTest: CreateTestComponent,
+    public dataService: Dataservice,
     private question: QuestionComponent,
   ) { }
 
@@ -135,16 +135,13 @@ export class ListTestDetailComponent implements OnInit {
       });
   }
 
-  /*doTest(IDTestDetail) {
-    this.createTest.getTest(this.testDetail.idSubject, IDTestDetail);
-  }*/
+  doTest(idTestDetail) {
+    this.idTestDetail = idTestDetail;
+  }
 
-  Notificate() {
-    swal({
-      imageUrl: '../../assets/images/loading3.gif',
-      imageAlt: 'Loading ...',
-      showConfirmButton: false
-    });
+  ngOnDestroy() {
+    this.dataService.idSubject = this.testDetail.idSubject;
+    this.dataService.idTestDetail = this.idTestDetail;
   }
 
   showQuestion(IDTestDetail) {
