@@ -1,18 +1,18 @@
 <section>
   <div class="container col-md-10">
-    <form (ngSubmit)="onSubmitText()">
+    <form (ngSubmit)="flag ? onSubmitText(): ''">
       <div *ngFor="let question of questions; let i = index">
         <div style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
           <h4 style="line-height: 30px" [innerHTML] = "'<strong>'+(i+1)+') </strong>'+question.content"></h4>
           <input name="idQuestion{{i}}" style="display: none">
           <div class="form-check" *ngFor="let answer of question.listIdAnswer">
             <label>
-              <input (click)="check(i, answer._id)" id="{{i}}_{{answer._id}}" type="radio" name="idAnswer{{i}}" value="{{answer._id}}"><span class="label-text"> {{answer.content}}</span>
+              <input (click)="check(i, answer._id)" type="radio" name="idAnswer{{i}}" value="{{answer._id}}"><span id="{{i}}_{{answer._id}}" class="label-text"> {{answer.content}}</span>
             </label>
           </div>
         </div>
       </div>
-      <button type="submit"> Submit </button>
+      <button type="submit" [disabled]="!flag" [style.display]="flag ? '' : 'none'" id="SubmitButton"> Submit </button>
     </form>
   </div>
 </section>
