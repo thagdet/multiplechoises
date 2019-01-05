@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Renderer2} from '@angular/core';
 import { Question } from '../_model/Question';
 import {FormBuilder, FormControl, FormGroup, NgForm, NgModel, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -16,12 +16,15 @@ export class CreateTestComponent implements OnInit {
   questions: Question[];
   numberOfQuestion: number;
   test = new Test();
+  idClass: string;
+  flag = true;
   results: {
     idQuestion: string,
     idAnswer: string,
   }[];
 
   constructor(
+    private renderer: Renderer2,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
@@ -42,6 +45,8 @@ export class CreateTestComponent implements OnInit {
 
   onSubmitText() {
     const data = {
+      idTestDetail: this.test.idTestDetail,
+      idClass: this.idClass,
       data: this.results,
       count: this.numberOfQuestion
     };
@@ -54,12 +59,19 @@ export class CreateTestComponent implements OnInit {
     this.createTestService.submitText(data).subscribe(
       value => {
         if (value.status) {
-          console.log(value)
-          let i = 0;
-          for (const val of value.data.posts) {
-            console.log(i + '_' + val.correctAnswer);
-            document.getElementById(i + '_' + val.correctAnswer ).style.color = '#00ff00';
-            i++;
+          this.flag = false;
+          // console.log(value);
+          swal({
+            title: 'DONE',
+            html: '<strong style="font-size: 16px">Your result: ' + value.data.mark + '</strong>',
+            type: 'success'
+          });
+          for (let i = 0; i < value.data.posts.length; i++) {
+            // console.log(i + '_' + val.correctAnswer);
+            if (value.data.posts[i].selectedAnswer) {
+              document.getElementById(i + '_' + value.data.posts[i].selectedAnswer ).style.color = 'Red';
+            }
+            document.getElementById(i + '_' + value.data.posts[i].correctAnswer ).style.color = '#00ff00';
           }
         } else {
           console.log(value);
@@ -68,7 +80,7 @@ export class CreateTestComponent implements OnInit {
         console.log(error);
       },
       () => {
-        swal.close();
+        document.getElementById('SubmitButton').style.display = 'none';
         console.log('completed');
       });
   }
@@ -84,7 +96,8 @@ export class CreateTestComponent implements OnInit {
       value => {
         swal.close();
         if (value.status) {
-          this.questions = <Question[]>value.data;
+          this.questions = <Question[]>value.data.questions;
+          this.idClass = value.data.idClass;
           this.numberOfQuestion = this.questions.length;
           this.results = new Array(this.numberOfQuestion);
           for (let i = 0; i < this.questions.length; i++) {
