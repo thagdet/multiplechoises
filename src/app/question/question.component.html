@@ -10,8 +10,8 @@
     </thead>
     <tbody *ngFor="let question of questions">
     <tr>
-      <td><textarea [(ngModel)]="question.content" style="overflow: hidden; border: none; width: 500px; height: 150px;">{{question.content}}</textarea></td>
-      <td><div *ngFor="let answer of question.listIdAnswer, let i = index"><textarea [(ngModel)]="answer.content" style="margin-bottom: 10px; overflow: hidden; border: none; width: 400px;" name="answer{{i}}" class="answer{{i}}" type="text"></textarea></div></td>
+      <td><textarea [(ngModel)]="question.content" style="border: none; height: 150px;">{{question.content}}</textarea></td>
+      <td><div *ngFor="let answer of question.listIdAnswer, let i = index"><textarea [(ngModel)]="answer.content" style="border: none; margin-bottom: 10px;" name="answer{{i}}" class="answer{{i}}" type="text"></textarea></div></td>
       <td><a (click)="UpdateQuestion(question)"><i class="fas fa-edit"></i></a></td>
       <td><a (click)="DeleteQuestion(question._id)"><i class="fas fa-trash-alt"></i></a></td>
     </tr>
@@ -39,11 +39,11 @@
           <tbody>
           <tr *ngFor="let question of newQuestions, let j = index">
             <td>
-              <textarea [(ngModel)]="question.content" style="overflow: hidden; width: 500px; height: 200px;">{{question.content}}</textarea>
+              <textarea [(ngModel)]="question.content" style="width: 500px; height: 200px;">{{question.content}}</textarea>
             </td>
             <td>
               <div *ngFor="let answer of question.listIdAnswer, let i = index">
-                <textarea [(ngModel)]="answer.content" style="margin-bottom: 10px; overflow: hidden; width: 400px;" name="answer{{i}}" class="answer{{i}}" type="text"></textarea>
+                <textarea [(ngModel)]="answer.content" style="margin-bottom: 10px; width: 400px;" name="answer{{i}}" class="answer{{i}}" type="text"></textarea>
               </div>
             </td>
             <td><a (click)="DeleteNewQuestion(j)"><i class="fas fa-trash-alt"></i></a></td>

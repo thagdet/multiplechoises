@@ -1,21 +1,30 @@
-<div class="col-sm-8 text-left">
-  <section>
-    <form (ngSubmit)="flag ? onSubmitText(): ''">
-      <div *ngFor="let question of questions; let i = index">
-        <div style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
-          <h4 style="line-height: 30px" [innerHTML] = "'<strong>'+(i+1)+') </strong>'+question.content"></h4>
-          <input name="idQuestion{{i}}" style="display: none">
-          <div class="form-check" *ngFor="let answer of question.listIdAnswer">
-            <label>
-              <input (click)="check(i, answer._id)" type="radio" name="idAnswer{{i}}" value="{{answer._id}}"><span id="{{i}}_{{answer._id}}" class="label-text"> {{answer.content}}</span>
-            </label>
-          </div>
+<div style="position:fixed" id="clockdiv">
+  <div>
+    <span class="hours">{{hours}}</span>
+    <div class="smalltext">Hours</div>
+  </div>
+  <div>
+    <span class="minutes">{{minutes}}</span>
+    <div class="smalltext">Minutes</div>
+  </div>
+  <div>
+    <span class="seconds">{{seconds}}</span>
+    <div class="smalltext">Seconds</div>
+  </div>
+</div>
+<section>
+  <form (ngSubmit)="flag ? onSubmitText(): ''">
+    <div *ngFor="let question of questions; let i = index">
+      <div style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
+        <h4 style="line-height: 30px" [innerHTML] = "'<strong>'+(i+1)+') </strong>'+question.content"></h4>
+        <input name="idQuestion{{i}}" style="display: none">
+        <div class="form-check" *ngFor="let answer of question.listIdAnswer">
+          <label>
+            <input (click)="check(i, answer._id)" type="radio" name="idAnswer{{i}}" value="{{answer._id}}"><span id="{{i}}_{{answer._id}}" class="label-text"> {{answer.content}}</span>
+          </label>
         </div>
       </div>
-      <button type="submit" [disabled]="!flag" [style.display]="flag ? '' : 'none'" id="SubmitButton"> Submit </button>
-    </form>
-  </section>
-</div>
-<div class="col-sm-2 sidenav">
-  <div style="position: fixed; top: 10%">{{hours}}h: {{minutes}}m: {{seconds}}s</div>
-</div>
+    </div>
+    <button type="submit" [disabled]="!flag" [style.display]="flag ? '' : 'none'" id="SubmitButton"> Submit </button>
+  </form>
+</section>

@@ -13,6 +13,7 @@ textarea {
   overflow: hidden;
   max-width: none;
   border: 1px solid;
+  width: -webkit-fill-available;
 }
 
 textarea:focus, input:focus {
@@ -21,4 +22,13 @@ textarea:focus, input:focus {
 
 mat-error {
   color: red;
+}
+
+#clockdiv{
+  font-family: sans-serif;
+  color: #fff;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 30px;
 }

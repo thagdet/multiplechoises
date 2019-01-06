@@ -21,9 +21,9 @@ export class CreateTestComponent implements OnInit {
   idClass: string;
   duration: number;
   duration2: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
+  hours: string;
+  minutes: string;
+  seconds: string;
   flag = true;
   interval;
   results: {
@@ -99,6 +99,14 @@ export class CreateTestComponent implements OnInit {
     // console.log(this.results);
   }
 
+  add(t: number) {
+    if (t < 10) {
+      return '0' + t;
+    } else {
+      return '' + t;
+    }
+  }
+
   getTest() {
     this.test.idAccount = localStorage.getItem('idAccount');
     this.createTestService.beginTest(this.test).subscribe(
@@ -122,15 +130,16 @@ export class CreateTestComponent implements OnInit {
 
           this.interval = setInterval(() => {
             if (this.duration > 0) {
-              this.hours = Math.floor((this.duration % ( 60 * 60 * 24)) / ( 60 * 60));
-              this.minutes = Math.floor((this.duration % ( 60 * 60)) / ( 60));
-              this.seconds = Math.floor((this.duration % ( 60)));
+              this.hours = this.add( Math.floor((this.duration % ( 60 * 60 * 24)) / ( 60 * 60)));
+              this.minutes = this.add( Math.floor((this.duration % ( 60 * 60)) / ( 60)));
+              this.seconds = this.add( Math.floor((this.duration % ( 60))));
               this.duration--;
             } else {
               this.onSubmitText();
               clearInterval(this.interval);
             }
-          }, 1000)
+          }, 1000);
+          // document.getElementById('CountTime').style.display = '';
         } else {
           swal({
             title: 'Failed',
