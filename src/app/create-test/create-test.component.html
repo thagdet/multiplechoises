@@ -1,6 +1,5 @@
-<div style="margin-left: 65%; position: fixed; top: 8%">{{hours}}h: {{minutes}}m: {{seconds}}s</div>
-<section>
-  <div class="container col-md-10">
+<div class="col-sm-8 text-left">
+  <section>
     <form (ngSubmit)="flag ? onSubmitText(): ''">
       <div *ngFor="let question of questions; let i = index">
         <div style="border-radius: 25px; border: 2px solid #80e5ff; padding: 20px; margin-bottom: 10px">
@@ -15,5 +14,8 @@
       </div>
       <button type="submit" [disabled]="!flag" [style.display]="flag ? '' : 'none'" id="SubmitButton"> Submit </button>
     </form>
-  </div>
-</section>
+  </section>
+</div>
+<div class="col-sm-2 sidenav">
+  <div style="position: fixed; top: 10%">{{hours}}h: {{minutes}}m: {{seconds}}s</div>
+</div>

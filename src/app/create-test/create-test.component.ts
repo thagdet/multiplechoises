@@ -105,6 +105,7 @@ export class CreateTestComponent implements OnInit {
       value => {
         swal.close();
         if (value.status) {
+          console.log(value);
           this.questions = <Question[]>value.data.questions;
           this.idClass = value.data.idClass;
           this.duration = value.data.duration * 60;
@@ -123,7 +124,7 @@ export class CreateTestComponent implements OnInit {
             if (this.duration > 0) {
               this.hours = Math.floor((this.duration % ( 60 * 60 * 24)) / ( 60 * 60));
               this.minutes = Math.floor((this.duration % ( 60 * 60)) / ( 60));
-              this.seconds = Math.floor((this.duration % ( 60)));    
+              this.seconds = Math.floor((this.duration % ( 60)));
               this.duration--;
             } else {
               this.onSubmitText();
