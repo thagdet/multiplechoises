@@ -135,16 +135,12 @@ export class ListTestDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  doTest(idTestDetail) {
+  getIdTestDetail(idTestDetail) {
     this.idTestDetail = idTestDetail;
   }
 
   ngOnDestroy() {
     this.dataService.idSubject = this.testDetail.idSubject;
     this.dataService.idTestDetail = this.idTestDetail;
-  }
-
-  showQuestion(IDTestDetail) {
-    this.question.getIdTestDetail(IDTestDetail);
   }
 }

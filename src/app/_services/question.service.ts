@@ -24,6 +24,12 @@ export class QuestionService {
     );
   }
 
+  GetAllQuestionByIdTestDetail(idTestDetail: string): Observable <Res> {
+    return this.http.get<Res>(Url.URL + 'question/testDetail/' + idTestDetail, httpOptions).pipe(
+      catchError(this.handleError <Res>('GetAllQuestionByIdTestDetail'))
+    );
+  }
+
   UpdateQuestion(question: Question): Observable <Res> {
     return this.http.put<Res>(Url.URL + 'question/update/' + question._id, question, httpOptions).pipe(
       catchError(this.handleError <Res>('UpdateQuestion'))

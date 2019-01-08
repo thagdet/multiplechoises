@@ -5,6 +5,7 @@ import {QuestionService} from '../_services/question.service';
 import swal from 'sweetalert2';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Answer} from '../_model/Answer';
+import {Dataservice} from '../list-test-detail/dataservice';
 
 @Component({
   selector: 'app-question',
@@ -26,6 +27,7 @@ export class QuestionComponent implements OnInit {
   };
 
   constructor(
+    private dataService: Dataservice,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
@@ -54,16 +56,14 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  getIdTestDetail(idTestDetail) {
-    this.idTestDetail = idTestDetail;
-  }
-
   OnLoadWithIDTestDetail() {
-    this.questionService.GetAllQuestionByIdSubject(this.idTestDetail).subscribe(
+    // console.log(this.dataService.idTestDetail);
+    this.questionService.GetAllQuestionByIdTestDetail(this.dataService.idTestDetail).subscribe(
       value => {
         // console.log(value);
         if (value.status) {
           const data = <Question[]>value.data;
+          console.log(data);
           this.questions = data;
         } else {
           console.log('fault');

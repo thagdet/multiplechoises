@@ -15,4 +15,53 @@
     </tr>
     </tbody>
   </table>
+  <button type="button" data-toggle="modal" data-target="#CreateSubject"> New Subject </button>
 </section>
+
+<div class="modal fade" id="CreateSubject" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" name="CreateSubjectForm" #CreateSubjectForm="ngForm" [formGroup]="formCreateSubject" (ngSubmit)="onSubmitCreateSubject()">
+            <span class="login100-form-logo">
+                <img src="../../assets/images/logo.png" width="180" height="70">
+            </span>
+        <span class="login100-form-title p-b-34 p-t-27">
+                New Subject
+              <button id="closeCreateTestDetailModal" type="button" class="close" data-dismiss="modal" style="display:none"></button>
+            </span>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="text" class="input100"
+                 [(ngModel)]="subject.name" formControlName="name" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Name"></span>
+          <mat-error *ngFor="let validation of validation_messages.name">
+            <mat-error class="error-message"
+                       *ngIf="formCreateSubject.get('name').hasError(validation.type) && (formCreateSubject.get('name').dirty || formCreateSubject.get('name').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="number" class="input100"
+                 [(ngModel)]="subject.credits" formControlName="credits" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Credits"></span>
+          <mat-error *ngFor="let validation of validation_messages.credits">
+            <mat-error class="error-message"
+                       *ngIf="formCreateSubject.get('credits').hasError(validation.type) && (formCreateSubject.get('credits').dirty || formCreateSubject.get('credits').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" type="submit" [disabled]="!(formCreateSubject.valid)">
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
