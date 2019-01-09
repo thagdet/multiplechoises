@@ -23,6 +23,8 @@ import { QuestionService } from './_services/question.service';
 import {Dataservice} from './list-test-detail/dataservice';
 import { AccountComponent } from './account/account.component';
 import {AccountService} from './_services/account.service';
+import { HomeComponent } from './home/home.component';
+import {UserService} from './_services/user.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import {AccountService} from './_services/account.service';
     ListTestDetailComponent,
     QuestionComponent,
     AccountComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import {AccountService} from './_services/account.service';
     TestDetailService,
     QuestionService,
     Dataservice,
-    AccountService
+    AccountService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

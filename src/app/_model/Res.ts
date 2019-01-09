@@ -3,4 +3,5 @@ export class Res {
   public data: any;
   public status: boolean;
   public message: string;
+  public profilePicture: string;
 }

@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('username', data.UserName);
           localStorage.setItem('idAccount', data._id);
           localStorage.setItem('IdRole', data.IdRole);
+          localStorage.setItem('pic', value.profilePicture);
           document.getElementById('closeLoginModal').click();
           swal({
             title: 'SUCCESS',
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
             type: 'success'
           });
           location.reload();
-          this.router.navigate(['/class']);
+          // this.router.navigate(['/class']);
         } else {
           console.log('fault');
           swal({

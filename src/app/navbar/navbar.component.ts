@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   validation_messages = {
     'username': [{type: 'required', message: 'Username is required'}],
     'password': [{type: 'required', message: 'Password is required'}],
+    'idRole': [{type: 'required', message: 'Id Role is required'}],
   };
 
   username: string;
@@ -32,6 +33,7 @@ export class NavbarComponent implements OnInit {
     this.formRegister = this.fb.group({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
+      idRole: new FormControl('', [Validators.required]),
     });
 
     window.onscroll = function () { myFunction(); };
@@ -47,8 +49,10 @@ export class NavbarComponent implements OnInit {
       }
     }
 
-    if (localStorage.getItem('token') !== undefined) {
+    if (localStorage.getItem('token') !== null) {
+      // console.log(localStorage.getItem('token'));
       this.username = localStorage.getItem('username');
+      document.getElementById('image2').setAttribute('src', 'data:image/png;base64,' + localStorage.getItem('pic'));
       this.IdRole = localStorage.getItem('IdRole');
     }
   }
