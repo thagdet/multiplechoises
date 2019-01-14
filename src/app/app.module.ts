@@ -25,6 +25,8 @@ import { AccountComponent } from './account/account.component';
 import {AccountService} from './_services/account.service';
 import { HomeComponent } from './home/home.component';
 import {UserService} from './_services/user.service';
+import { HistoryTestComponent } from './history-test/history-test.component';
+import {TestService} from './_services/test.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import {UserService} from './_services/user.service';
     QuestionComponent,
     AccountComponent,
     HomeComponent,
+    HistoryTestComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import {UserService} from './_services/user.service';
     QuestionService,
     Dataservice,
     AccountService,
-    UserService
+    UserService,
+    TestService
   ],
   bootstrap: [AppComponent]
 })

@@ -4,7 +4,7 @@
     <tr>
       <th>Name</th>
       <th>Credits</th>
-      <th>Show Question</th>
+      <th *ngIf="IdRole == 1 || IdRole == 2">Show Question</th>
       <th>Details</th>
     </tr>
     </thead>
@@ -12,7 +12,7 @@
     <tr routerLink="{{'/TestDetail/Class/'+subject.idAccount_Subject.idSubject._id}}">
       <td>{{subject.idAccount_Subject.idSubject.name}}</td>
       <td>{{subject.idAccount_Subject.idSubject.credits}}</td>
-      <td><a routerLink="{{'/Question/Subject/'+subject.idAccount_Subject.idSubject._id}}" style="cursor: pointer"><i class="fas fa-th-list"></i></a></td>
+      <td *ngIf="IdRole == 1 || IdRole == 2"><a routerLink="{{'/Question/Subject/'+subject.idAccount_Subject.idSubject._id}}" style="cursor: pointer"><i class="fas fa-th-list"></i></a></td>
       <td><a style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
     </tr>
     </tbody>

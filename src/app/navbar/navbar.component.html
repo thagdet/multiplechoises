@@ -7,87 +7,21 @@
       <li><a routerLink="{{'/'}}">Home</a></li>
       <li><a routerLink="{{'/subject'}}">Subject</a></li>
       <li><a routerLink="{{'/class'}}">Class</a></li>
+      <li><a routerLink="{{'/result'}}">Result</a></li>
       <li *ngIf="IdRole==1"><a routerLink="{{'/account'}}">Account</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li style="cursor: pointer" *ngIf="IdRole==1" data-toggle="modal" data-target="#RegisterModal"><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <img alt="Log Out" id="image2" style="max-width: 200px; max-height: 50px"><li style="cursor: pointer" *ngIf="username"><a (click)="logout()"> {{username}}</a></li>
       <li style="cursor: pointer" *ngIf="!username" id="loginClick" data-toggle="modal" data-target="#loginRoute"><a><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+      <li>
+        <div style="border: 2px solid #ffffff; border-radius: 100%;"><div class="avatar-frame"><img alt="Log Out" id="image2" src="../../assets/images/images.jpg"></div></div>
+        <ul *ngIf="username" class="dropdown">
+          <div>
+          <li routerLink="{{'/'}}"> {{username}} </li>
+          <li (click)="logout()">Log out</li>
+          </div>
+        </ul>
+      </li>
     </ul>
-  </div>
-</div>
-<div *ngIf="IdRole==1" class="modal fade" id="RegisterModal" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="wrap-login100">
-      <form class="login100-form validate-form" name="RegisterForm" #RegisterForm="ngForm" [formGroup]="formRegister" (ngSubmit)="OnSubmitRegister()">
-            <span class="login100-form-logo">
-                <img src="../../assets/images/logo.png" width="180" height="70">
-            </span>
-        <span class="login100-form-title p-b-34 p-t-27">
-                Register
-              <button id="closeRegisterModal" type="button" class="close" data-dismiss="modal" style="display:none"></button>
-            </span>
-
-        <mat-form-field class="wrap-input100 validate-input">
-          <input matInput type="text" class="input100"
-                 [(ngModel)]="account.UserName" formControlName="username" required
-                 maxlength="50">
-          <span class="focus-input100" data-placeholder="Username"></span>
-          <mat-error *ngFor="let validation of validation_messages.username">
-            <mat-error class="error-message"
-                       *ngIf="formRegister.get('username').hasError(validation.type) && (formRegister.get('username').dirty || formRegister.get('username').touched)">
-              {{validation.message}}
-            </mat-error>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="wrap-input100 validate-input">
-          <input matInput type="password" class="input100"
-                 [(ngModel)]="account.Password" formControlName="password" required
-                 maxlength="50">
-          <span class="focus-input100" data-placeholder="Password"></span>
-          <mat-error *ngFor="let validation of validation_messages.password">
-            <mat-error class="error-message"
-                       *ngIf="formRegister.get('password').hasError(validation.type) && (formRegister.get('password').dirty || formRegister.get('password').touched)">
-              {{validation.message}}
-            </mat-error>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="wrap-input100 validate-input">
-          <input matInput type="text" class="input100"
-                 [(ngModel)]="account.Gmail" [ngModelOptions]="{standalone: true}"
-                 maxlength="50">
-          <span class="focus-input100" data-placeholder="Gmail"></span>
-        </mat-form-field>
-
-        <mat-form-field class="wrap-input100 validate-input">
-          <input matInput type="text" class="input100"
-                 [(ngModel)]="account.Facebook" [ngModelOptions]="{standalone: true}"
-                 maxlength="50">
-          <span class="focus-input100" data-placeholder="Facebook"></span>
-        </mat-form-field>
-
-        <mat-form-field class="wrap-input100 validate-input">
-          <input matInput type="text" class="input100"
-                 [(ngModel)]="account.IdRole" formControlName="idRole" required
-                 maxlength="50">
-          <span class="focus-input100" data-placeholder="Id Role"></span>
-          <mat-error *ngFor="let validation of validation_messages.idRole">
-            <mat-error class="error-message"
-                       *ngIf="formRegister.get('idRole').hasError(validation.type) && (formRegister.get('idRole').dirty || formRegister.get('idRole').touched)">
-              {{validation.message}}
-            </mat-error>
-          </mat-error>
-        </mat-form-field>
-
-        <div class="container-login100-form-btn">
-          <button class="login100-form-btn" type="submit" [disabled]="!(formRegister.valid)">
-            Register
-          </button>
-        </div>
-      </form>
-    </div>
   </div>
 </div>
 <app-login></app-login>

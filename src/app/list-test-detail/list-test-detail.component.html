@@ -4,8 +4,9 @@
     <tr>
       <th>Description</th>
       <th>Duration</th>
-      <th>Is Open</th>
-      <th>List Question Details</th>
+      <th>Number of Question</th>
+      <th *ngIf="IdRole!=3">Is Open</th>
+      <th *ngIf="IdRole!=3">List Question Details</th>
       <th>Do Test</th>
     </tr>
     </thead>
@@ -13,13 +14,14 @@
     <tr>
       <td>{{testDetail.description}}</td>
       <td>{{testDetail.duration}}</td>
-      <td><a style="cursor: pointer"><input type="checkbox" [(ngModel)]="testDetail.isOpen" (change) = updateTestDetail(testDetail)></a></td>
-      <td><a (click)="getIdTestDetail(testDetail._id)" routerLink="{{'/TestDetail/Detail'}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+      <td>{{testDetail.quantityOfQuestions}}</td>
+      <td *ngIf="IdRole!=3"><a style="cursor: pointer"><input type="checkbox" [(ngModel)]="testDetail.isOpen" (change) = updateTestDetail(testDetail)></a></td>
+      <td *ngIf="IdRole!=3"><a (click)="getIdTestDetail(testDetail._id)" routerLink="{{'/TestDetail/Detail'}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
       <td><a *ngIf="testDetail.isOpen" (click)="getIdTestDetail(testDetail._id)" routerLink="{{'/createTest'}}"><i class="fas fa-pen"></i></a></td>
     </tr>
     </tbody>
   </table>
-  <button data-toggle="modal" data-target="#CreateTestDetail"> New TestDetail </button>
+  <button *ngIf="IdRole!=3" class="btn btn-primary" data-toggle="modal" data-target="#CreateTestDetail"> New Test Detail </button>
 </section>
 
 <div class="modal fade" id="CreateTestDetail" role="dialog" tabindex="-1">

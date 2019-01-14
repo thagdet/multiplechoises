@@ -7,6 +7,7 @@ import {ListTestDetailComponent} from './list-test-detail/list-test-detail.compo
 import {QuestionComponent} from './question/question.component';
 import {AccountComponent} from './account/account.component';
 import {HomeComponent} from './home/home.component';
+import {HistoryTestComponent} from './history-test/history-test.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'TestDetail/Detail', component: QuestionComponent},
   { path: 'Question/Subject/:idSubject', component: QuestionComponent},
   { path: 'account', component: AccountComponent},
+  { path: 'result', component: HistoryTestComponent},
   ];
 
 @NgModule({

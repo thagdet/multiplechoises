@@ -10,6 +10,7 @@ import {ClassOfAccountService} from '../_services/class-of-account.service';
 })
 export class ClassOfAccountComponent implements OnInit {
   classOfAccount: Subject[];
+  private IdRole = localStorage.getItem('IdRole');
   constructor(
     private classOfAccountService: ClassOfAccountService,
   ) { }
@@ -30,7 +31,9 @@ export class ClassOfAccountComponent implements OnInit {
           swal({
             title: 'Failed',
             html: value.message,
-            type: 'error'
+            type: 'error',
+            showConfirmButton: false,
+            timer: 2000
           });
         }
       }, error => {

@@ -4,6 +4,7 @@ import { SubjectService } from '../_services/subject.service';
 import { Subject } from '../_model/Subject';
 import { Classes } from '../_model/Classes';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-subject',
@@ -31,6 +32,7 @@ export class SubjectComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private subjectService: SubjectService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,7 +53,9 @@ export class SubjectComponent implements OnInit {
           swal({
             title: 'Failed',
             html: value.message,
-            type: 'error'
+            type: 'error',
+            showConfirmButton: false,
+            timer: 2000
           });
         }
       }, error => {
@@ -62,48 +66,84 @@ export class SubjectComponent implements OnInit {
       });
   }
   onClickJoinButton(idSubject) {
-    this.classes.idAccount = localStorage.getItem('idAccount');
-    this.classes.idSubject = idSubject;
-    this.subjectService.CreateClass(this.classes).subscribe(
-      value => {
-        if (value.status) {
-        } else {
-          console.log('fault');
-          swal({
-            title: 'Failed',
-            html: value.message,
-            type: 'error'
+    swal({
+      title: 'Are you sure?',
+      html: 'You wont be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then((result) => {
+      if (result.value) {
+        this.classes.idAccount = localStorage.getItem('idAccount');
+        this.classes.idSubject = idSubject;
+        this.subjectService.CreateClass(this.classes).subscribe(
+          value => {
+            if (value.status) {
+              swal({
+                title: 'SUCCESS',
+                html: value.message,
+                type: 'success',
+                timer: 2000
+              });
+              this.router.navigate(['/class']);
+            } else {
+              console.log('fault');
+              swal({
+                title: 'Failed',
+                html: value.message,
+                type: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            }
+          }, error => {
+            console.log(error);
+          },
+          () => {
+            console.log('completed');
           });
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        console.log('completed');
-      });
+      }
+    });
   }
   onSubmitCreateSubject() {
-    this.subjectService.CreateNewSubject(this.subject).subscribe(
-      value => {
-        if (value.status) {
-          swal({
-            title: 'Success',
-            html: value.message,
-            type: 'success'
+    swal({
+      title: 'Are you sure?',
+      html: 'You wont be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then((result) => {
+      if (result.value) {
+        this.subjectService.CreateNewSubject(this.subject).subscribe(
+          value => {
+            if (value.status) {
+              swal({
+                title: 'Success',
+                html: value.message,
+                type: 'success',
+                timer: 2000
+              });
+            } else {
+              console.log('fault');
+              swal({
+                title: 'Failed',
+                html: value.message,
+                type: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            }
+          }, error => {
+            console.log(error);
+          },
+          () => {
+            console.log('completed');
           });
-        } else {
-          console.log('fault');
-          swal({
-            title: 'Failed',
-            html: value.message,
-            type: 'error'
-          });
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        console.log('completed');
-      });
+      }
+    });
   }
 }

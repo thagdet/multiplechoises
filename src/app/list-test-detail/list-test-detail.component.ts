@@ -17,6 +17,7 @@ export class ListTestDetailComponent implements OnInit, OnDestroy {
   testDetails: TestDetail[];
   private sub: any;
   idTestDetail: string;
+  private IdRole = localStorage.getItem('IdRole');
 
   validation_messages = {
     'description': [{type: 'required', message: 'Description is required'}],
@@ -69,7 +70,9 @@ export class ListTestDetailComponent implements OnInit, OnDestroy {
           swal({
             title: 'Failed',
             html: value.message,
-            type: 'error'
+            type: 'error',
+            showConfirmButton: false,
+            timer: 2000
           });
         }
       }, error => {
@@ -80,59 +83,89 @@ export class ListTestDetailComponent implements OnInit, OnDestroy {
       });
   }
   onSubmitCreateTestDetail() {
-    this.testDetailService.CreateTestDetail(this.testDetail).subscribe(
-      value => {
-        // console.log(value);
-        if (value.status) {
-          // const data = <TestDetail>value.data;
-          document.getElementById('closeLoginModal').click();
-          swal({
-            title: 'SUCCESS',
-            html: value.message,
-            type: 'success'
+    swal({
+      title: 'Are you sure?',
+      html: 'You wont be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then((result) => {
+      if (result.value) {
+        this.testDetailService.CreateTestDetail(this.testDetail).subscribe(
+          value => {
+            // console.log(value);
+            if (value.status) {
+              // const data = <TestDetail>value.data;
+              document.getElementById('closeLoginModal').click();
+              swal({
+                title: 'SUCCESS',
+                html: value.message,
+                type: 'success',
+                timer: 2000
+              });
+              location.reload();
+            } else {
+              console.log('fault');
+              swal({
+                title: 'Failed',
+                html: value.message,
+                type: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            }
+          }, error => {
+            console.log(error);
+          },
+          () => {
+            console.log('completed');
           });
-          location.reload();
-        } else {
-          console.log('fault');
-          swal({
-            title: 'Failed',
-            html: value.message,
-            type: 'error'
-          });
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        console.log('completed');
-      });
+      }
+    });
   }
 
   updateTestDetail(testDetail: TestDetail) {
-    this.testDetailService.UpdateTestDetail(testDetail).subscribe(
-      value => {
-        // console.log(value);
-        if (value.status) {
-          // const data = <TestDetail>value.data;
-          swal({
-            title: 'SUCCESS',
-            html: value.message,
-            type: 'success'
+    swal({
+      title: 'Are you sure?',
+      html: 'You wont be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then((result) => {
+      if (result.value) {
+        this.testDetailService.UpdateTestDetail(testDetail).subscribe(
+          value => {
+            // console.log(value);
+            if (value.status) {
+              // const data = <TestDetail>value.data;
+              swal({
+                title: 'SUCCESS',
+                html: value.message,
+                type: 'success',
+                timer: 2000
+              });
+            } else {
+              console.log('fault');
+              swal({
+                title: 'Failed',
+                html: value.message,
+                type: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            }
+          }, error => {
+            console.log(error);
+          },
+          () => {
+            console.log('completed');
           });
-        } else {
-          console.log('fault');
-          swal({
-            title: 'Failed',
-            html: value.message,
-            type: 'error'
-          });
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        console.log('completed');
-      });
+      }
+    });
   }
 
   getIdTestDetail(idTestDetail) {

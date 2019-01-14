@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           swal({
             title: 'Failed',
             html: value.message,
-            type: 'error'
+            type: 'error',
           });
         }
       }, error => {

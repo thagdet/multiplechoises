@@ -39,6 +39,11 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    swal({
+      imageUrl: '../../assets/images/loading3.gif',
+      imageAlt: 'Loading ...',
+      showConfirmButton: false
+    });
     this.formCreateQuestion = this.fb.group({
       content: new FormControl('', [Validators.required]),
       contentAnswer0: new FormControl('', [Validators.required]),
@@ -60,17 +65,18 @@ export class QuestionComponent implements OnInit {
     // console.log(this.dataService.idTestDetail);
     this.questionService.GetAllQuestionByIdTestDetail(this.dataService.idTestDetail).subscribe(
       value => {
-        // console.log(value);
+         console.log(value);
         if (value.status) {
-          const data = <Question[]>value.data;
-          console.log(data);
-          this.questions = data;
+          this.questions = <Question[]>value.data;
+          swal.close();
         } else {
           console.log('fault');
           swal({
             title: 'Failed',
             html: value.message,
-            type: 'error'
+            type: 'error',
+            showConfirmButton: false,
+            timer: 2000
           });
         }
       }, error => {
@@ -86,14 +92,16 @@ export class QuestionComponent implements OnInit {
       value => {
         // console.log(value);
         if (value.status) {
-          const data = <Question[]>value.data;
-          this.questions = data;
+          this.questions = <Question[]>value.data;
+          swal.close();
         } else {
           console.log('fault');
           swal({
             title: 'Failed',
             html: value.message,
-            type: 'error'
+            type: 'error',
+            showConfirmButton: false,
+            timer: 2000
           });
         }
       }, error => {
@@ -105,31 +113,46 @@ export class QuestionComponent implements OnInit {
   }
 
   UpdateQuestion(question) {
-    this.questionService.UpdateQuestion(question).subscribe(
-      value => {
-        // console.log(value);
-        if (value.status) {
-          swal({
-            title: 'SUCCESS',
-            html: value.message,
-            type: 'success'
+    swal({
+      title: 'Are you sure?',
+      html: 'You wont be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then((result) => {
+      if (result.value) {
+        this.questionService.UpdateQuestion(question).subscribe(
+          value => {
+            // console.log(value);
+            if (value.status) {
+              swal({
+                title: 'SUCCESS',
+                html: value.message,
+                type: 'success',
+                timer: 2000
+              });
+              this.OnLoadWithIDSubject();
+              // location.reload();
+            } else {
+              console.log('fault');
+              swal({
+                title: 'Failed',
+                html: value.message,
+                type: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            }
+          }, error => {
+            console.log(error);
+          },
+          () => {
+            console.log('completed');
           });
-          this.OnLoadWithIDSubject();
-          // location.reload();
-        } else {
-          console.log('fault');
-          swal({
-            title: 'Failed',
-            html: value.message,
-            type: 'error'
-          });
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        console.log('completed');
-      });
+      }
+    });
   }
 
   addNewQuestion() {
@@ -145,68 +168,98 @@ export class QuestionComponent implements OnInit {
   }
 
   OnSubmitAddNewQuestion() {
-    this.newQuestions.push(this.newQuestion);
-    const sender = {
-      questions: this.newQuestions,
-      idSubject: this.idSubject,
-    };
-    this.questionService.CreateQuestion(sender).subscribe(
-      value => {
-        // console.log(value);
-        if (value.status) {
-          /*this.newQuestions = [];
-          this.newQuestion.content = '';
-          this.newQuestion.listIdAnswer = [new Answer(), new Answer(), new Answer(), new Answer()];
-          this.Onload();*/
-          document.getElementById('closeCreateQuestionModal').click();
-          swal({
-            title: 'SUCCESS',
-            html: value.message,
-            type: 'success'
+    swal({
+      title: 'Are you sure?',
+      html: 'You wont be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then((result) => {
+      if (result.value) {
+        this.newQuestions.push(this.newQuestion);
+        const sender = {
+          questions: this.newQuestions,
+          idSubject: this.idSubject,
+        };
+        this.questionService.CreateQuestion(sender).subscribe(
+          value => {
+            // console.log(value);
+            if (value.status) {
+              /*this.newQuestions = [];
+              this.newQuestion.content = '';
+              this.newQuestion.listIdAnswer = [new Answer(), new Answer(), new Answer(), new Answer()];
+              this.Onload();*/
+              document.getElementById('closeCreateQuestionModal').click();
+              swal({
+                title: 'SUCCESS',
+                html: value.message,
+                type: 'success',
+                timer: 2000
+              });
+              location.reload();
+            } else {
+              this.newQuestions.splice(this.newQuestions.length - 1, 1);
+              console.log('fault');
+              swal({
+                title: 'Failed',
+                html: value.message,
+                type: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            }
+          }, error => {
+            console.log(error);
+          },
+          () => {
+            console.log('completed');
           });
-          location.reload();
-        } else {
-          this.newQuestions.splice(this.newQuestions.length - 1, 1);
-          console.log('fault');
-          swal({
-            title: 'Failed',
-            html: value.message,
-            type: 'error'
-          });
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        console.log('completed');
-      });
+      }
+    });
   }
 
   DeleteQuestion(id) {
-    this.questionService.DeleteQuestion(id).subscribe(
-      value => {
-        // console.log(value);
-        if (value.status) {
-          swal({
-            title: 'SUCCESS',
-            html: value.message,
-            type: 'success'
+    swal({
+      title: 'Are you sure?',
+      html: 'You wont be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then((result) => {
+      if (result.value) {
+        this.questionService.DeleteQuestion(id).subscribe(
+          value => {
+            // console.log(value);
+            if (value.status) {
+              swal({
+                title: 'SUCCESS',
+                html: value.message,
+                type: 'success',
+                timer: 2000
+              });
+              this.OnLoadWithIDSubject();
+              // location.reload();
+            } else {
+              console.log('fault');
+              swal({
+                title: 'Failed',
+                html: value.message,
+                type: 'error',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            }
+          }, error => {
+            console.log(error);
+          },
+          () => {
+            console.log('completed');
           });
-          this.OnLoadWithIDSubject();
-          // location.reload();
-        } else {
-          console.log('fault');
-          swal({
-            title: 'Failed',
-            html: value.message,
-            type: 'error'
-          });
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        console.log('completed');
-      });
+      }
+    });
   }
 }

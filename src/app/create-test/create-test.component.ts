@@ -52,46 +52,58 @@ export class CreateTestComponent implements OnInit {
   }
 
   onSubmitText() {
-    const data = {
-      idTestDetail: this.test.idTestDetail,
-      idClass: this.idClass,
-      data: this.results,
-      count: this.numberOfQuestion,
-      timeComplete: this.duration2 - this.duration
-    };
-    // console.log(data);
     swal({
-      imageUrl: '../../assets/images/loading3.gif',
-      imageAlt: 'Loading ...',
-      showConfirmButton: false
-    });
-    this.createTestService.submitText(data).subscribe(
-      value => {
-        if (value.status) {
-          this.flag = false;
-          // console.log(value);
-          swal({
-            title: 'DONE',
-            html: '<strong style="font-size: 16px">Your result: ' + value.data.mark + '</strong>',
-            type: 'success'
-          });
-          for (let i = 0; i < value.data.posts.length; i++) {
-            // console.log(i + '_' + val.correctAnswer);
-            if (value.data.posts[i].selectedAnswer) {
-              document.getElementById(i + '_' + value.data.posts[i].selectedAnswer).style.color = 'Red';
+      title: 'Are you sure?',
+      html: 'You wont be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Submit!'
+    }).then((result) => {
+      if (result.value) {
+        const data = {
+          idTestDetail: this.test.idTestDetail,
+          idClass: this.idClass,
+          data: this.results,
+          count: this.numberOfQuestion,
+          timeComplete: this.duration2 - this.duration
+        };
+        // console.log(data);
+        swal({
+          imageUrl: '../../assets/images/loading3.gif',
+          imageAlt: 'Loading ...',
+          showConfirmButton: false
+        });
+        this.createTestService.submitText(data).subscribe(
+          value => {
+            if (value.status) {
+              this.flag = false;
+              // console.log(value);
+              swal({
+                title: 'DONE',
+                html: '<strong style="font-size: 16px">Your result: ' + value.data.mark + '</strong>',
+                type: 'success'
+              });
+              for (let i = 0; i < value.data.posts.length; i++) {
+                // console.log(i + '_' + val.correctAnswer);
+                if (value.data.posts[i].selectedAnswer) {
+                  document.getElementById(i + '_' + value.data.posts[i].selectedAnswer).style.color = 'Red';
+                }
+                document.getElementById(i + '_' + value.data.posts[i].correctAnswer).style.color = '#00ff00';
+              }
+            } else {
+              console.log(value);
             }
-            document.getElementById(i + '_' + value.data.posts[i].correctAnswer).style.color = '#00ff00';
-          }
-        } else {
-          console.log(value);
-        }
-      }, error => {
-        console.log(error);
-      },
-      () => {
-        document.getElementById('SubmitButton').style.display = 'none';
-        console.log('completed');
-      });
+          }, error => {
+            console.log(error);
+          },
+          () => {
+            document.getElementById('SubmitButton').style.display = 'none';
+            console.log('completed');
+          });
+      }
+    });
   }
 
   check(index, idAnswer) {
@@ -113,7 +125,7 @@ export class CreateTestComponent implements OnInit {
       value => {
         swal.close();
         if (value.status) {
-          console.log(value);
+          // console.log(value);
           this.questions = <Question[]>value.data.questions;
           this.idClass = value.data.idClass;
           this.duration = value.data.duration * 60;
@@ -144,7 +156,9 @@ export class CreateTestComponent implements OnInit {
           swal({
             title: 'Failed',
             html: value.message,
-            type: 'error'
+            type: 'error',
+            showConfirmButton: false,
+            timer: 2000
           });
           console.log(value);
         }

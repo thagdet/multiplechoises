@@ -5,7 +5,6 @@ import {Url} from '../url';
 import {catchError} from 'rxjs/operators';
 import {TestDetail} from '../_model/TestDetail';
 import {Res} from '../_model/Res';
-import {Test} from '../_model/Test';
 
 const httpOptions = {
   headers: new HttpHeaders({
