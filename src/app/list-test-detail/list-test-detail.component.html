@@ -5,8 +5,8 @@
       <th>Description</th>
       <th>Duration</th>
       <th>Number of Question</th>
-      <th *ngIf="IdRole!=3">Is Open</th>
-      <th *ngIf="IdRole!=3">List Question Details</th>
+      <th *ngIf="IdRole!='3'">Is Open</th>
+      <th *ngIf="IdRole!='3'">List Question Details</th>
       <th>Do Test</th>
     </tr>
     </thead>
@@ -15,8 +15,8 @@
       <td>{{testDetail.description}}</td>
       <td>{{testDetail.duration}}</td>
       <td>{{testDetail.quantityOfQuestions}}</td>
-      <td *ngIf="IdRole!=3"><a style="cursor: pointer"><input type="checkbox" [(ngModel)]="testDetail.isOpen" (change) = updateTestDetail(testDetail)></a></td>
-      <td *ngIf="IdRole!=3"><a (click)="getIdTestDetail(testDetail._id)" routerLink="{{'/TestDetail/Detail'}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+      <td *ngIf="IdRole!='3'"><a style="cursor: pointer"><input type="checkbox" [(ngModel)]="testDetail.isOpen" (change) = updateTestDetail(testDetail)></a></td>
+      <td *ngIf="IdRole!='3'"><a (click)="getIdTestDetail(testDetail._id)" routerLink="{{'/TestDetail/Detail'}}" style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
       <td><a *ngIf="testDetail.isOpen" (click)="getIdTestDetail(testDetail._id)" routerLink="{{'/createTest'}}"><i class="fas fa-pen"></i></a></td>
     </tr>
     </tbody>

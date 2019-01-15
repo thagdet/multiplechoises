@@ -10,7 +10,7 @@ import {ClassOfAccountService} from '../_services/class-of-account.service';
 })
 export class ClassOfAccountComponent implements OnInit {
   classOfAccount: Subject[];
-  public IdRole = <number>localStorage.getItem('IdRole');
+  public IdRole = localStorage.getItem('IdRole');
   constructor(
     private classOfAccountService: ClassOfAccountService,
   ) { }
