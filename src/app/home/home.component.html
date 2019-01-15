@@ -1,0 +1,31 @@
+<h1 class="text-center">Your Information</h1>
+<hr>
+<div class="col-sm-4" style="text-align: center;">
+  <label for="image"><img style="max-height: 200px; max-width: 200px" id="image3" src='../../assets/images/images.jpg'></label>
+  <input style="display:none" name="image" type="file" id="image" (change)="onFileChange($event)"
+         #fileInput accept=".jpg, .jpeg, .png">
+</div>
+<div class="col-sm-8">
+  <table *ngIf="user" class="table mytable">
+    <tr>
+      <td><label>Full Name: </label></td>
+      <td><input [attr.disabled]="ifUpdate ? null : true" [(ngModel)]="user.fullName"></td>
+    </tr>
+    <tr>
+      <td><label>Day of birth: </label></td>
+      <td><input [attr.disabled]="ifUpdate ? null : true" [(ngModel)]="user.dayOfBirth"></td>
+    </tr>
+    <tr>
+      <td><label>Address: </label></td>
+      <td><input [attr.disabled]="ifUpdate ? null : true" [(ngModel)]="user.address"></td>
+    </tr>
+    <tr>
+      <td><label>Phone number: </label></td>
+      <td><input [attr.disabled]="ifUpdate ? null : true" [(ngModel)]="user.phoneNumber"></td>
+    </tr>
+  </table>
+  <div style="display: flex; justify-content: center">
+    <button class="text-center" style="margin-bottom: 20px" class="btn btn-primary" (click)="this.ifUpdate = true" [style.display]="ifUpdate ? 'none' : 'block'"> Update Data </button>
+    <button class="text-center" style="margin-bottom: 20px" class="btn btn-primary" (click)="onUpdateUser()" [style.display]="!ifUpdate ? 'none' : 'block'"> Save </button>
+  </div>
+  </div>

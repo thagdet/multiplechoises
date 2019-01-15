@@ -1,0 +1,137 @@
+<section class="main-content flex-1">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Gmail</th>
+      <th>Facebook</th>
+      <th>Role</th>
+      <th colspan="2"></th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let account of accounts, let i = index">
+    <tr>
+      <td>{{account.UserName}}</td>
+      <td>{{account.Gmail}}</td>
+      <td>{{account.Facebook}}</td>
+      <td>{{account.IdRole}}</td>
+      <td><a style="cursor: pointer" data-target="#UpdateAccount" (click)="getInforAccount(i)" data-toggle="modal"><i class="fas fa-edit"></i></a></td>
+      <td><a style="cursor: pointer" (click)="onDelete(account._id)"><i class="fas fa-trash-alt"></i></a></td>
+    </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" data-toggle="modal" data-target="#RegisterModal"> New Account </button>
+</section>
+
+<div class="modal fade" id="UpdateAccount" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id="closeCreateQuestionModal" data-dismiss="modal" style="display: none"></button>
+        <h4 class="modal-title">Update</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover" style="margin-bottom: 0px">
+          <tr>
+            <td><label>Username: </label></td>
+            <td><input [(ngModel)]="account.UserName" style="width: 300px"></td>
+          </tr>
+          <tr>
+            <td><label>Password: </label></td>
+            <td><input [(ngModel)]="account.Password" style="width: 300px"></td>
+          </tr>
+          <tr>
+            <td><label>Gmail: </label></td>
+            <td><input [(ngModel)]="account.Gmail" style="width: 300px"></td>
+          </tr>
+          <tr>
+            <td><label>Facebook: </label></td>
+            <td><input [(ngModel)]="account.Facebook" style="width: 300px"></td>
+          </tr>
+          <tr>
+            <td><label>IdRole: </label></td>
+            <td><input [(ngModel)]="account.IdRole" style="width: 300px"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="OnSubmitUpdateAccount()" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="RegisterModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" name="RegisterForm" #RegisterForm="ngForm" [formGroup]="formRegister" (ngSubmit)="OnSubmitRegister()">
+            <span class="login100-form-logo">
+                <img src="../../assets/images/logo.png" width="180" height="70">
+            </span>
+        <span class="login100-form-title p-b-34 p-t-27">
+                Register
+              <button id="closeRegisterModal" type="button" class="close" data-dismiss="modal" style="display:none"></button>
+            </span>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="text" class="input100"
+                 [(ngModel)]="account.UserName" formControlName="username" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Username"></span>
+          <mat-error *ngFor="let validation of validation_messages.username">
+            <mat-error class="error-message"
+                       *ngIf="formRegister.get('username').hasError(validation.type) && (formRegister.get('username').dirty || formRegister.get('username').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="password" class="input100"
+                 [(ngModel)]="account.Password" formControlName="password" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Password"></span>
+          <mat-error *ngFor="let validation of validation_messages.password">
+            <mat-error class="error-message"
+                       *ngIf="formRegister.get('password').hasError(validation.type) && (formRegister.get('password').dirty || formRegister.get('password').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="text" class="input100"
+                 [(ngModel)]="account.Gmail" [ngModelOptions]="{standalone: true}"
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Gmail"></span>
+        </mat-form-field>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="text" class="input100"
+                 [(ngModel)]="account.Facebook" [ngModelOptions]="{standalone: true}"
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Facebook"></span>
+        </mat-form-field>
+
+        <mat-form-field class="wrap-input100 validate-input">
+          <input matInput type="text" class="input100"
+                 [(ngModel)]="account.IdRole" formControlName="idRole" required
+                 maxlength="50">
+          <span class="focus-input100" data-placeholder="Id Role"></span>
+          <mat-error *ngFor="let validation of validation_messages.idRole">
+            <mat-error class="error-message"
+                       *ngIf="formRegister.get('idRole').hasError(validation.type) && (formRegister.get('idRole').dirty || formRegister.get('idRole').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" type="submit" [disabled]="!(formRegister.valid)">
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

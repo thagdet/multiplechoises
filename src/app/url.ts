@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class Url {
-  public static URL = 'http://192.168.12.118ont:1234/';
+  public static URL = 'https://evening-sierra-59961.herokuapp.com/';
 }
 
 export const enum AUTH {

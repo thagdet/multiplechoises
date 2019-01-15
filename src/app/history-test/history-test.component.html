@@ -1,0 +1,46 @@
+<section class="main-content flex-1">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th width="25%">Subject Name</th>
+      <th width="25%">Credits</th>
+      <th width="25%">Stage</th>
+      <th width="25%">Details</th>
+    </tr>
+    </thead>
+  </table>
+
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default" *ngFor="let subject of classes, let i = index">
+        <table class="table table-hover" data-parent="#accordion" data-toggle="collapse" [attr.href]="'#collapse'+ i">
+          <tr>
+            <td width="25%">{{subject.idAccount_Subject.idSubject.name}}</td>
+            <td width="25%">{{subject.idAccount_Subject.idSubject.credits}}</td>
+            <td width="25%">{{subject.status}}</td>
+            <td width="25%"><a style="cursor: pointer"><i class="fas fa-file-signature"></i></a></td>
+          </tr>
+        </table>
+
+      <div id="collapse{{i}}" class="panel-collapse collapse">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Test Name</th>
+            <th>Result</th>
+            <th>Status</th>
+            <th>Time Complete</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let test of subject.listTest">
+          <tr data-toggle="collapse" data-parent="#accordion"  [attr.href]="'#collapse'+ i">
+            <td>{{test.idTestDetail.description}}</td>
+            <td>{{test.result}}</td>
+            <td>{{test.isComplete ? 'Done' : 'You havent done this test'}}</td>
+            <td>{{test.timeComplete}} s</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

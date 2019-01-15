@@ -1,0 +1,4 @@
+.mytable>tbody>tr>td {
+  border-top: none;
+  border-bottom: 1px solid #ddd;
+}
