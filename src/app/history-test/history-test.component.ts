@@ -28,7 +28,7 @@ export class HistoryTestComponent implements OnInit {
           this.classes = value.data.class;
           this.tests = value.data.posts;
           for ( let i = 0; i < this.classes.length; i++) {
-              this.classes[i]['listTest'] = <[any]>this.tests[i];
+              this.classes[i]['listTest'] = this.tests[i];
               this.classes[i]['status'] = '' + 0 + ' / ' + 0;
           }
           // console.log(this.classes);
