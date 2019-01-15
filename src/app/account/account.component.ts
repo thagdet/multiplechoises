@@ -12,7 +12,7 @@ import {LoginService} from '../_services/login.service';
 })
 export class AccountComponent implements OnInit {
   formRegister: FormGroup;
-  private accounts: Account[];
+  public accounts: Account[];
 
   validation_messages = {
     'username': [{type: 'required', message: 'Username is required'}],

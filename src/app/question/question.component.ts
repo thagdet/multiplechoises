@@ -16,7 +16,7 @@ export class QuestionComponent implements OnInit {
   questions: Question[];
   formCreateQuestion: FormGroup;
   private newQuestions: Question[] = [];
-  private newQuestion: Question;
+  public newQuestion: Question;
   private idSubject: string;
   private sub: any;
   private idTestDetail: string;

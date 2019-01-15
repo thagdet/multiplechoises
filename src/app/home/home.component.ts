@@ -10,8 +10,8 @@ import swal from 'sweetalert2';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private user: User;
-  private ifUpdate = false;
+  protected user: User;
+  protected ifUpdate = false;
   constructor(
     private userService: UserService,
   ) { }
