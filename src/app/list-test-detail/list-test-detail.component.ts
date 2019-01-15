@@ -17,7 +17,7 @@ export class ListTestDetailComponent implements OnInit, OnDestroy {
   testDetails: TestDetail[];
   private sub: any;
   idTestDetail: string;
-  protected IdRole = localStorage.getItem('IdRole');
+  public IdRole = localStorage.getItem('IdRole');
 
   validation_messages = {
     'description': [{type: 'required', message: 'Description is required'}],

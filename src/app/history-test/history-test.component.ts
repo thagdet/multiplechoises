@@ -14,7 +14,7 @@ import {Classes} from '../_model/Classes';
 export class HistoryTestComponent implements OnInit {
   private classOfAccount: Subject[];
   private tests: Test[];
-  protected classes: Classes[];
+  public classes: Classes[];
   constructor(
     private classOfAccountService: ClassOfAccountService,
     private testService: TestService,

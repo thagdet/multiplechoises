@@ -15,7 +15,7 @@ import {Dataservice} from '../list-test-detail/dataservice';
 export class QuestionComponent implements OnInit {
   questions: Question[];
   formCreateQuestion: FormGroup;
-  private newQuestions: Question[] = [];
+  public newQuestions: Question[] = [];
   public newQuestion: Question;
   private idSubject: string;
   private sub: any;
