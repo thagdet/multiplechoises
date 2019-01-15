@@ -6,7 +6,7 @@ var app = express();
 
 // Serve only the static files form the dist directory
 app.use(express.static('/dist/MultiplechoicesManagement'));
-
+console.log('app');
 app.get('/*', function(req,res) {
 
   res.sendFile(path.join('/dist/MultiplechoicesManagement/index.html'));
