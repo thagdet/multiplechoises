@@ -4,6 +4,7 @@ import {Account} from '../_model/Account';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import swal from "sweetalert2";
 import {LoginService} from '../_services/login.service';
+import {User} from '../_model/User';
 
 @Component({
   selector: 'app-navbar',
@@ -44,7 +45,16 @@ export class NavbarComponent implements OnInit {
       }
     }
 
-    setInterval(this.loginService.logout, 60000);
+    setInterval( () => {
+      this.loginService.ping().subscribe(
+        value => {
+          console.log(value.status);
+        }, error => {
+          console.log(error);
+        },
+        () => {
+          console.log('completed');
+        }); }, 60000);
   }
 
   logout() {
