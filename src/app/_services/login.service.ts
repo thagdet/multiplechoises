@@ -38,7 +38,7 @@ export class LoginService {
   }
 
   ping(): Observable <Res> {
-    return this.http.get<Res>(Url.URL + 'account/ping', httpOptions).pipe(
+    return this.http.get<Res>(Url.URL + 'account/abc/ping', httpOptions).pipe(
       catchError(this.handleError <Res>('ping'))
     );
   }
