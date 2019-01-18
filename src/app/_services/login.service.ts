@@ -37,6 +37,12 @@ export class LoginService {
     );
   }
 
+  logout(): Observable <Res> {
+    return this.http.get<Res>(Url.URL + 'account/ping', httpOptions).pipe(
+      catchError(this.handleError <Res>('logout'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (response: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure

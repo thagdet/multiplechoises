@@ -43,6 +43,8 @@ export class NavbarComponent implements OnInit {
         document.getElementById('image2').setAttribute('src', 'data:image/png;base64,' + localStorage.getItem('pic'));
       }
     }
+
+    setInterval(this.loginService.logout, 60000);
   }
 
   logout() {
